@@ -1,0 +1,40 @@
+User:
+id (PK)
+email (unique, not-null)
+password (hash-function PBKDF2)
+first_name (mb null)
+last_name (mb null) 
+date_registered (not-null)
+
+Список присоединяется к user
+List:
+id (PK)
+user (FK)
+title (not-null)
+
+Task:
+id (PK)
+list (FK)
+title (not-null)
+order (int) 
+is_completed (boolean, default = false)
+date_created (not-null)
+date_completed (mb null, default = null) 
+
+*drag_and_drop не должен выходить за пределы своего окна,
+*чтобы очерёдность номера менялась по одной
+Последовательность дел в списке формируется с хвоста. При добавлении
+номер присваивается максимальный, причем номер = id добавленного дела. 
+При событии изменения порядка дел на приватный урл идет запрос, 
+состоящий из айдишников передвинутых дел и их новых номеров. 
+Новые номера вычисляются на фронтенде и оттуда летят на бэк. 
+
+//prev_task (int id на task, mb null x1)
+//next_task (int id на task, mb null x1)
+status (boolean, defoult = false)
+
+Вход в систему происходит при помощи указания
+email/password 
+Требуется подтверждение эл. почты. Автоматически скидывается ссылка 
+для подтверждения почты
+
