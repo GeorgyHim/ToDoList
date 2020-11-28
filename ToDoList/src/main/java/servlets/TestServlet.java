@@ -20,9 +20,8 @@ public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, Object> data = new HashMap<>();
         data.put("user", new User("sambady"));
-        data.put("time", LocalDate.now());
+        data.put("date", LocalDate.now().toString());
         returnData(response, gson.toJson(data));
-
     }
 
     /**
