@@ -12,7 +12,7 @@ public class HibernateSessionFactory {
     /** Фабрика сессий Hibernate */
     private static SessionFactory sessionFactory;
 
-    /** */
+    /** Конфигурация Hibernate */
     private static Configuration configuration;
 
     private HibernateSessionFactory() {
@@ -21,11 +21,13 @@ public class HibernateSessionFactory {
         sessionFactory = createSessionFactory();
     }
 
+    /** Метод добавления аннотированных классов моделей */
     private void addAnnotatedClasses() {
         // TODO: Добавить классы моделей
         //configuration.addAnnotatedClass();
     }
 
+    /** Метод создания {@link SessionFactory}*/
     private static SessionFactory createSessionFactory() {
         if (configuration == null) {
             configuration = new Configuration();
