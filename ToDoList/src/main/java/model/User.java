@@ -19,7 +19,7 @@ public class User implements Serializable {
 
     /** Email */
     @Column(unique = true, updatable = false, nullable = false)
-    private final String email;
+    private String email;
 
     /** Пароль в виде хэша */
     @Column
@@ -58,6 +58,9 @@ public class User implements Serializable {
 
     public User(String email) {
         this(email, "secret");
+    }
+
+    public User() {
     }
 
     public String getEmail() {
