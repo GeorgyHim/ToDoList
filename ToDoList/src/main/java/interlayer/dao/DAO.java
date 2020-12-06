@@ -1,9 +1,12 @@
 package interlayer.dao;
 
 import interlayer.hibernate.HibernateSessionFactory;
+import model.User;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 public class DAO<T> {
 
@@ -27,6 +30,20 @@ public class DAO<T> {
     public T getById(long id) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(typeOfObject, id);
+        }
+    }
+
+    /**
+     * Метод получения единственного объекта класса T по имени и значению поля
+     *
+     * @param fieldName -   Название поля
+     * @param value     -   Значение поля
+     * @return          -   Найденный объект или null
+     */
+    public T getByField(String fieldName, Object value) {
+        try(Session session = sessionFactory.openSession()) {
+            Criteria criteria = session.createCriteria(typeOfObject);
+            return (T) criteria.add(Restrictions.eq(fieldName, value)).uniqueResult();
         }
     }
 
