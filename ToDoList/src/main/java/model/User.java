@@ -59,4 +59,24 @@ public class User implements Serializable {
     public User(String email) {
         this(email, "secret");
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public LocalDateTime getDt_registered() {
+        return dt_registered;
+    }
 }
