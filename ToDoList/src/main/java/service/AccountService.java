@@ -23,28 +23,28 @@ public class AccountService {
         this.authorizedUsers = new HashMap<>();
     }
 
-//    /**
-//     * Метод регистрации нового пользователя
-//     *
-//     * @param newUser                   - Новый пользователь
-//     * @throws UserAlreadyRegistered    - Исключение в ситуации когда указанный логин уже занят
-//     */
-//    public void registerNewUser(User newUser) throws UserAlreadyRegistered {
-//        if (userDAO.getByLogin(newUser.getLogin()) != null)
-//            throw new UserAlreadyRegistered();
-//
-//        userDAO.addUser(newUser);
-//    }
+    /**
+     * Метод регистрации нового пользователя
+     *
+     * @param newUser                   - Новый пользователь
+     * @throws UserAlreadyRegistered    - Исключение в ситуации когда указанный логин уже занят
+     */
+    public void registerNewUser(User newUser) throws UserAlreadyRegistered {
+        if (userDAO.getByField("email", newUser.getEmail()) != null)
+            throw new UserAlreadyRegistered();
 
-//    /**
-//     * Метод получения пользователя по его логину
-//     *
-//     * @param login - Логин пользователя
-//     * @return      - Найденный пользователь либо Null
-//     */
-//    public User getUserByLogin(String login) {
-//        return userDAO.getByLogin(login);
-//    }
+        userDAO.add(newUser);
+    }
+
+    /**
+     * Метод получения пользователя по его логину
+     *
+     * @param email - Email пользователя
+     * @return      - Найденный пользователь либо Null
+     */
+    public User getUserByLogin(String email) {
+        return userDAO.getByField("email", email);
+    }
 
     /**
      * Метод получения авторизованного пользователя по его сессии
