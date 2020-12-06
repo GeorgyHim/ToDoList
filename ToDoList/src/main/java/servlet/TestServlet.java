@@ -1,7 +1,7 @@
-package servlets;
+package servlet;
 
 import com.google.gson.Gson;
-import models.user.User;
+import model.User;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package models.user;
+package model;
 
 public class User {
     /** Логин пользователя*/
