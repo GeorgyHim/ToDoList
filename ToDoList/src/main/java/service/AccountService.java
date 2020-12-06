@@ -13,6 +13,7 @@ import java.util.Map;
  */
 public class AccountService {
 
+    /** Объект {@link DAO} для модели {@link User}*/
     private final DAO<User> userDAO;
 
     /** Перечень авторизованных пользователей со связью sessionId-{@link User} */

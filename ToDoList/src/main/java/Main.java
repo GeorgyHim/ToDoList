@@ -1,9 +1,15 @@
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import service.AccountService;
+import servlet.AuthInfoEndServlet;
+import servlet.SignInServlet;
+import servlet.SignUpServlet;
 import servlet.TestServlet;
 
 public class Main {
+    private static AccountService accountService = new AccountService();
+
     public static void main(String[] args) throws Exception {
         Server server = createServer(8080);
         server.start();
@@ -12,11 +18,13 @@ public class Main {
     }
 
     private static Server createServer(int port) {
-        TestServlet testServlet = new TestServlet();
-        ServletContextHandler handler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        handler.addServlet(new ServletHolder(testServlet), "/test");
+        ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        contextHandler.addServlet(new ServletHolder(new AuthInfoEndServlet(accountService)), "/api/auth/");
+        contextHandler.addServlet(new ServletHolder(new SignInServlet(accountService)), "/signin");
+        contextHandler.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/signup");
+        contextHandler.addServlet(new ServletHolder(new TestServlet()), "/test");
         Server server = new Server(port);
-        server.setHandler(handler);
+        server.setHandler(contextHandler);
         return server;
     }
 }

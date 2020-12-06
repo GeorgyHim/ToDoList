@@ -1,7 +1,6 @@
 package interlayer.dao;
 
 import interlayer.hibernate.HibernateSessionFactory;
-import model.User;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
