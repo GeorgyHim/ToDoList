@@ -2,7 +2,6 @@ package service;
 
 import interlayer.dao.DAO;
 import model.User;
-import util.exception.UserAlreadyAuthorized;
 import util.exception.UserAlreadyRegistered;
 
 import java.util.HashMap;
@@ -62,12 +61,8 @@ public class AccountService {
      *
      * @param sessionId                 - Идентификатор сессии пользвателя
      * @param user                      - Пользователь
-     * @throws UserAlreadyAuthorized    - Исключение когда указанная сессия уже связана с другим пользователем
      */
-    public void loginUser(String sessionId, User user) throws UserAlreadyAuthorized {
-        if (authorizedUsers.containsKey(sessionId) && !authorizedUsers.get(sessionId).equals(user))
-            throw new UserAlreadyAuthorized();
-
+    public void loginUser(String sessionId, User user) {
         authorizedUsers.put(sessionId, user);
     }
 
