@@ -1,10 +1,10 @@
-User:
+﻿User:
 id (PK)
 email (unique, not-null)
 password (hash-function PBKDF2)
-first_name (mb null)
-last_name (mb null) 
-date_registered (not-null)
+name (not-null)
+surname (not-null) 
+dt_registered (not-null)
 
 Список присоединяется к user
 List:
@@ -31,7 +31,7 @@ date_completed (mb null, default = null)
 
 //prev_task (int id на task, mb null x1)
 //next_task (int id на task, mb null x1)
-status (boolean, defoult = false)
+//status (boolean, default = false)
 
 Вход в систему происходит при помощи указания
 email/password 
