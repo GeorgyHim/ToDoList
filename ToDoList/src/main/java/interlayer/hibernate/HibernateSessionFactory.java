@@ -1,5 +1,6 @@
 package interlayer.hibernate;
 
+import model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -17,14 +18,12 @@ public class HibernateSessionFactory {
 
     private HibernateSessionFactory() {
         configuration = new Configuration();
-        addAnnotatedClasses();
         sessionFactory = createSessionFactory();
     }
 
     /** Метод добавления аннотированных классов моделей */
-    private void addAnnotatedClasses() {
-        // TODO: Добавить классы моделей
-        //configuration.addAnnotatedClass();
+    private static void addAnnotatedClasses() {
+        configuration.addAnnotatedClass(User.class);
     }
 
     /** Метод создания {@link SessionFactory}*/
@@ -32,6 +31,7 @@ public class HibernateSessionFactory {
         if (configuration == null) {
             configuration = new Configuration();
         }
+        addAnnotatedClasses();
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());
         ServiceRegistry serviceRegistry = builder.build();
