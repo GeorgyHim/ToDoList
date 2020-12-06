@@ -52,7 +52,11 @@ public class User implements Serializable {
         this.last_name = last_name;
     }
 
+    public User(String email, String password) {
+        this(email, password, "", "");
+    }
+
     public User(String email) {
-        this(email, "secret_password", "", "");
+        this(email, "secret");
     }
 }
