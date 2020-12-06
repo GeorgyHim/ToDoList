@@ -2,13 +2,14 @@ package model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.Optional;
 
 /**
  * Пользователь
  */
 @Entity
-@Table
+@Table(name = "profile")
 public class User implements Serializable {
     private static final long serialVersionUID = 1;
 
@@ -27,29 +28,29 @@ public class User implements Serializable {
 
     /** Имя  */
     @Column(nullable = false)
-    private String first_name;
+    private String name;
 
     /** Фамилия */
     @Column(nullable = false)
-    private String last_name;
+    private String surname;
 
     /** Дата и время регистрации*/
     @Column
-    private LocalDateTime dt_registered;
+    private LocalDate dt_registered;
 
     /**
      * Метод автоматического добавления даты и времени регистрации
      */
     @PrePersist
     protected void onCreate() {
-        dt_registered = LocalDateTime.now();
+        dt_registered = LocalDate.now();
     }
 
-    public User(String email, String password, String first_name, String last_name) {
+    public User(String email, String password, String name, String surname) {
         this.email = email;
         this.password = password;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.name = Optional.ofNullable(name).orElse("");
+        this.surname = Optional.ofNullable(surname).orElse("");
     }
 
     public User(String email, String password) {
@@ -71,15 +72,15 @@ public class User implements Serializable {
         return password;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getName() {
+        return name;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getSurname() {
+        return surname;
     }
 
-    public LocalDateTime getDt_registered() {
+    public LocalDate getDt_registered() {
         return dt_registered;
     }
 }

@@ -4,10 +4,10 @@ import model.User;
 import service.AccountService;
 import util.exception.UserAlreadyRegistered;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 public class SignUpServlet extends AccountServlet {
 
@@ -19,22 +19,25 @@ public class SignUpServlet extends AccountServlet {
      * Метод регистрации пользователя
      */
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         setContentType(response);
 
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        if (login == null || login.isEmpty() || password == null || password.isEmpty()) {
+        String email = Optional.ofNullable(request.getParameter("email")).orElse("");
+        String password = Optional.ofNullable(request.getParameter("password")).orElse("");
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
+
+        if (email.isEmpty() || password.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        User user = new User(login, password);
+        User user = new User(email, password, name, surname);
         try {
             accountService.registerNewUser(user);
-            response.getWriter().println(String.format("User %s registered", login));
+            response.getWriter().println(String.format("User %s registered", email));
         } catch (UserAlreadyRegistered userAlreadyRegistered) {
-            response.getWriter().println("User already exist");
+            response.getWriter().println(String.format("User %s already exist", email));
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
