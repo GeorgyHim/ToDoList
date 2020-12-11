@@ -65,6 +65,10 @@ public class ToDoList implements Serializable {
         return user;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }

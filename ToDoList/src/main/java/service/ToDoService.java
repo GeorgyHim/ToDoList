@@ -1,5 +1,6 @@
 package service;
 
+import model.Task;
 import model.ToDoList;
 import model.User;
 
@@ -17,5 +18,12 @@ public class ToDoService {
         user.getToDoLists().add(list);
     }
 
-    public static void addTaskToList() {}
+    /**
+     * Метод добавления дела в список
+     * @param task      -   дело
+     * @param toDoList  -   список дел
+     */
+    public static void addTaskToList(Task task, ToDoList toDoList) {
+        toDoList.getTasks().add(task);
+    }
 }
