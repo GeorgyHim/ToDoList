@@ -49,6 +49,8 @@ public class Creator {
     public static Task createTask(String title, ToDoList list) throws ValidationError {
         Task task = new Task(title, list);
         taskDAO.add(task);
+        task.setOrderNumber((int) task.getId());
+        TaskDAO.getInstance().update(task);
         return task;
     }
 

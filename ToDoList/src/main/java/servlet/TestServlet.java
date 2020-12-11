@@ -25,7 +25,7 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            User user = Creator.createUser("atingo");
+            User user = Creator.createUser("sa231");
             ToDoList list = Creator.createToDoList("Common things", user);
             Task task = Creator.createTask("Some work", list);
             Map<String, Object> data = new HashMap<>();

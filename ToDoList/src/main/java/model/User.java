@@ -45,7 +45,7 @@ public class User implements Serializable {
     /**
      * Метод автоматического добавления даты и времени регистрации
      */
-    @PostPersist
+    @PrePersist
     protected void onCreate() {
         dtRegistered = LocalDate.now();
     }

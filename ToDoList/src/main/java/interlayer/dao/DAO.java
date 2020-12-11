@@ -74,7 +74,7 @@ abstract class DAO<T> {
     public void update(T object) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.saveOrUpdate(object);
+            session.update(object);
             transaction.commit();
         }
     }

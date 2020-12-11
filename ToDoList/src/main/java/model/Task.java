@@ -47,10 +47,9 @@ public class Task {
     /**
      * Метод автоматического добавления даты и времени создания
      */
-    @PostPersist
+    @PrePersist
     protected void onCreate() {
         dtCreated = LocalDateTime.now();
-        this.orderNumber = (int) this.id;
     }
 
     public Task() {
