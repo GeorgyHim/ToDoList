@@ -1,6 +1,6 @@
 package service;
 
-import interlayer.dao.DAO;
+import interlayer.dao.UserDAO;
 import model.User;
 import util.exception.UserAlreadyRegistered;
 
@@ -12,14 +12,14 @@ import java.util.Map;
  */
 public class AccountService {
 
-    /** Объект {@link DAO} для модели {@link User}*/
-    private final DAO<User> userDAO;
+    /** Объект {@link UserDAO} для модели {@link User}*/
+    private final UserDAO userDAO;
 
     /** Перечень авторизованных пользователей со связью sessionId-{@link User} */
     private final Map<String, User> authorizedUsers;
 
     public AccountService() {
-        userDAO = new DAO<>(User.class);
+        userDAO = UserDAO.getInstance();
         this.authorizedUsers = new HashMap<>();
     }
 

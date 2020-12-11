@@ -7,13 +7,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-public class DAO<T> {
+abstract class DAO<T> {
 
     /** Объект {@link SessionFactory} для создания сессий */
     private SessionFactory sessionFactory;
 
     /** Явный тип (класс) объекта, которому соответствует параметр T */
-    private final Class<T> typeOfObject;
+    private Class<T> typeOfObject;
 
     public DAO(Class<T> typeOfObject) {
         this.typeOfObject = typeOfObject;
