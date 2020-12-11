@@ -11,7 +11,7 @@ import java.util.Optional;
 @Entity
 @Table(name = "profile")
 public class User implements Serializable {
-    private static final long serialVersionUID = 1;
+    private static final long serialVersionUID = 2;
 
     /** Идентификатор */
     @Id
@@ -33,6 +33,9 @@ public class User implements Serializable {
     /** Фамилия */
     @Column(nullable = false)
     private String surname;
+
+    /** Списки дел*/
+    // TODO: List<ToDoList>
 
     /** Дата и время регистрации*/
     @Column
