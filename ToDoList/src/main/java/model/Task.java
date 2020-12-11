@@ -25,7 +25,7 @@ public class Task {
 
     /** Номер дела в списке */
     @Column
-    private int order;
+    private int orderNumber;
 
     /** Выполнено ли дело */
     @Column
@@ -50,7 +50,7 @@ public class Task {
     @PostPersist
     protected void onCreate() {
         dtCreated = LocalDateTime.now();
-        this.order = (int) this.id;
+        this.orderNumber = (int) this.id;
     }
 
     public Task() {
@@ -80,8 +80,8 @@ public class Task {
         return title;
     }
 
-    public int getOrder() {
-        return order;
+    public int getOrderNumber() {
+        return orderNumber;
     }
 
     public ToDoList getList() {
@@ -104,8 +104,8 @@ public class Task {
         this.title = title;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public void setCompleted(boolean completed) {

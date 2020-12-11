@@ -3,9 +3,7 @@ package model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Пользователь
@@ -42,7 +40,7 @@ public class User implements Serializable {
 
     /** Списки дел*/
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<ToDoList> toDoLists;
+    private Set<ToDoList> toDoLists;
 
     /**
      * Метод автоматического добавления даты и времени регистрации
@@ -57,7 +55,7 @@ public class User implements Serializable {
         this.password = password;
         this.name = Optional.ofNullable(name).orElse("");
         this.surname = Optional.ofNullable(surname).orElse("");
-        this.toDoLists = Collections.emptyList();
+        this.toDoLists = new HashSet<>();
     }
 
     protected User(String email, String password) {
@@ -91,7 +89,7 @@ public class User implements Serializable {
         return dtRegistered;
     }
 
-    public List<ToDoList> getToDoLists() {
+    public Set<ToDoList> getToDoLists() {
         return toDoLists;
     }
 }

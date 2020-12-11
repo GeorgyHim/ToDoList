@@ -4,10 +4,7 @@ import util.exception.ValidationError;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Список дел
@@ -33,7 +30,7 @@ public class ToDoList implements Serializable {
 
     /** Задачи списка*/
     @OneToMany(mappedBy = "list", fetch = FetchType.EAGER)
-    private List<Task> tasks;
+    private Set<Task> tasks;
 
     public ToDoList() {
     }
@@ -47,7 +44,7 @@ public class ToDoList implements Serializable {
         }
         this.title = title;
         this.user = user;
-        this.tasks = new ArrayList<>();
+        this.tasks = new HashSet<>();
     }
 
     public static long getSerialVersionUID() {
@@ -66,7 +63,7 @@ public class ToDoList implements Serializable {
         return user;
     }
 
-    public List<Task> getTasks() {
+    public Set<Task> getTasks() {
         return tasks;
     }
 
