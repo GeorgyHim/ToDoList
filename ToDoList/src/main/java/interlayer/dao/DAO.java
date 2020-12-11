@@ -7,6 +7,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+/**
+ * Абстрактный объект доступа к данным
+ *
+ * @param <T>   -   тип объектов, с которыми работает DAO
+ */
 abstract class DAO<T> {
 
     /** Объект {@link SessionFactory} для создания сессий */
