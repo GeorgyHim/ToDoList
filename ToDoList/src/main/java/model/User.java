@@ -42,7 +42,7 @@ public class User implements Serializable {
 
     /** Списки дел*/
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    public Collection<ToDoList> toDoLists;
+    private Collection<ToDoList> toDoLists;
 
     /**
      * Метод автоматического добавления даты и времени регистрации
@@ -89,5 +89,9 @@ public class User implements Serializable {
 
     public LocalDate getDt_registered() {
         return dt_registered;
+    }
+
+    public Collection<ToDoList> getToDoLists() {
+        return toDoLists;
     }
 }
