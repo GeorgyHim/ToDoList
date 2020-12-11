@@ -3,8 +3,8 @@ package model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -42,7 +42,7 @@ public class User implements Serializable {
 
     /** Списки дел*/
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Collection<ToDoList> toDoLists;
+    private List<ToDoList> toDoLists;
 
     /**
      * Метод автоматического добавления даты и времени регистрации
@@ -91,7 +91,7 @@ public class User implements Serializable {
         return dt_registered;
     }
 
-    public Collection<ToDoList> getToDoLists() {
+    public List<ToDoList> getToDoLists() {
         return toDoLists;
     }
 }
