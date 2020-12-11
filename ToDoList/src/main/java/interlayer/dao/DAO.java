@@ -65,4 +65,17 @@ abstract class DAO<T> {
             return id;
         }
     }
+
+    /**
+     * Метод обновления объекта БД
+     *
+     * @param object    -   объект
+     */
+    public void update(T object) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.saveOrUpdate(object);
+            transaction.commit();
+        }
+    }
 }
