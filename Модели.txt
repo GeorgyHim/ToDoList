@@ -29,9 +29,6 @@ date_completed (mb null, default = null)
 состоящий из айдишников передвинутых дел и их новых номеров. 
 Новые номера вычисляются на фронтенде и оттуда летят на бэк. 
 
-//prev_task (int id на task, mb null x1)
-//next_task (int id на task, mb null x1)
-//status (boolean, default = false)
 
 Вход в систему происходит при помощи указания
 email/password 

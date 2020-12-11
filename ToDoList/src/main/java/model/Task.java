@@ -1,7 +1,9 @@
 package model;
 
 import javax.persistence.*;
+import javax.xml.bind.ValidationException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * Задача
@@ -26,7 +28,7 @@ public class Task {
 
     /** Выполнено ли дело */
     @Column
-    private boolean is_completed = false;
+    private boolean is_completed;
 
     /** Дата и время регистрации*/
     @Column(updatable = false)
@@ -39,9 +41,21 @@ public class Task {
     /**
      * Метод автоматического добавления даты и времени создания
      */
-    @PrePersist
+    @PostPersist
     protected void onCreate() {
         dt_created = LocalDateTime.now();
+        this.order = (int) this.id;
+    }
+
+    public Task() {
+    }
+
+    public Task(String title) throws ValidationException {
+        if (Optional.ofNullable(title).orElse("").equals("")) {
+            throw new ValidationException("Название дела не может быть пустым!");
+        }
+        this.title = title;
+        this.is_completed = false;
     }
 
     public static long getSerialVersionUID() {
