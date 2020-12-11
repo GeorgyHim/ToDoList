@@ -20,5 +20,8 @@ public class ToDoList implements Serializable {
     @Column(nullable = false)
     private String title;
 
-
+    /** Пользователь, которому принадлежит список дел */
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -3,6 +3,7 @@ package model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Optional;
 
 /**
@@ -34,12 +35,13 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String surname;
 
-    /** Списки дел*/
-    // TODO: List<ToDoList>
-
     /** Дата и время регистрации*/
     @Column
     private LocalDate dt_registered;
+
+    /** Списки дел*/
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    public Collection<ToDoList> lists;
 
     /**
      * Метод автоматического добавления даты и времени регистрации
