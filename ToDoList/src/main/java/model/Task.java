@@ -84,7 +84,9 @@ public class Task {
         return order;
     }
 
-
+    public ToDoList getList() {
+        return list;
+    }
 
     public boolean isCompleted() {
         return completed;
