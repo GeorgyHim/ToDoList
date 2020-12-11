@@ -4,7 +4,7 @@ email (unique, not-null)
 password (hash-function PBKDF2)
 name (not-null)
 surname (not-null) 
-dt_registered (not-null)
+dtRegistered (not-null)
 
 Список присоединяется к user
 ToDoList:
@@ -17,9 +17,9 @@ id (PK)
 list (FK)
 title (not-null)
 order (int) 
-is_completed (boolean, default = false)
-date_created (not-null)
-date_completed (mb null, default = null) 
+completed (boolean, default = false)
+dtCreated (not-null)
+dtCompleted (mb null, default = null) 
 
 *drag_and_drop не должен выходить за пределы своего окна,
 *чтобы очерёдность номера менялась по одной

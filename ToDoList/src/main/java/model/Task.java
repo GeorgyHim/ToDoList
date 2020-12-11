@@ -29,7 +29,7 @@ public class Task {
 
     /** Выполнено ли дело */
     @Column
-    private boolean is_completed;
+    private boolean completed;
 
     /** Список, к которому относится дело */
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
@@ -38,18 +38,18 @@ public class Task {
 
     /** Дата и время регистрации*/
     @Column(updatable = false)
-    private LocalDateTime dt_created;
+    private LocalDateTime dtCreated;
 
     /** Дата и время выполнения */
     @Column
-    private LocalDateTime dt_completed;
+    private LocalDateTime dtCompleted;
 
     /**
      * Метод автоматического добавления даты и времени создания
      */
     @PostPersist
     protected void onCreate() {
-        dt_created = LocalDateTime.now();
+        dtCreated = LocalDateTime.now();
         this.order = (int) this.id;
     }
 
@@ -64,7 +64,7 @@ public class Task {
             throw new ValidationError("Укажите родительский список дел!");
         }
         this.title = title;
-        this.is_completed = false;
+        this.completed = false;
         this.list = list;
     }
 
@@ -84,16 +84,18 @@ public class Task {
         return order;
     }
 
-    public boolean isIs_completed() {
-        return is_completed;
+
+
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public LocalDateTime getDt_created() {
-        return dt_created;
+    public LocalDateTime getDtCreated() {
+        return dtCreated;
     }
 
-    public LocalDateTime getDt_completed() {
-        return dt_completed;
+    public LocalDateTime getDtCompleted() {
+        return dtCompleted;
     }
 
     public void setTitle(String title) {
@@ -104,11 +106,11 @@ public class Task {
         this.order = order;
     }
 
-    public void setIs_completed(boolean is_completed) {
-        if (!this.is_completed && is_completed)
-            dt_completed = LocalDateTime.now();
-        if (this.is_completed && !is_completed)
-            dt_completed = null;
-        this.is_completed = is_completed;
+    public void setCompleted(boolean completed) {
+        if (!this.completed && completed)
+            dtCompleted = LocalDateTime.now();
+        if (this.completed && !completed)
+            dtCompleted = null;
+        this.completed = completed;
     }
 }

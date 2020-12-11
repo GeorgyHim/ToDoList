@@ -38,7 +38,7 @@ public class User implements Serializable {
 
     /** Дата регистрации*/
     @Column(updatable = false)
-    private LocalDate dt_registered;
+    private LocalDate dtRegistered;
 
     /** Списки дел*/
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
@@ -49,7 +49,7 @@ public class User implements Serializable {
      */
     @PostPersist
     protected void onCreate() {
-        dt_registered = LocalDate.now();
+        dtRegistered = LocalDate.now();
     }
 
     private User(String email, String password, String name, String surname) {
@@ -87,8 +87,8 @@ public class User implements Serializable {
         return surname;
     }
 
-    public LocalDate getDt_registered() {
-        return dt_registered;
+    public LocalDate getDtRegistered() {
+        return dtRegistered;
     }
 
     public List<ToDoList> getToDoLists() {
