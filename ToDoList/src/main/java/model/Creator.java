@@ -23,6 +23,7 @@ public class Creator {
     public static ToDoList createToDoList(String title, User user) throws ValidationError {
         ToDoList toDoList = new ToDoList(title, user);
         toDoListDAO.add(toDoList);
+        addListToItsUser(toDoList);
         return toDoList;
     }
 
@@ -33,6 +34,7 @@ public class Creator {
      */
     private static void addListToItsUser(ToDoList list) {
         list.getUser().getToDoLists().add(list);
+        userDAO.update(list.getUser());
     }
 
     /**
@@ -41,5 +43,6 @@ public class Creator {
      */
     private static void addTaskToItsList(Task task) {
         task.getList().getTasks().add(task);
+        toDoListDAO.update(task.getList());
     }
 }
