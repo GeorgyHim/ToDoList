@@ -18,7 +18,7 @@ public class ToDoList implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    /** Название списка*/
+    /** Название */
     @Column(nullable = false)
     private String title;
 
@@ -39,5 +39,21 @@ public class ToDoList implements Serializable {
         }
         this.title = title;
         this.user = user;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
