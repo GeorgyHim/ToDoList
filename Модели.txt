@@ -7,7 +7,7 @@ surname (not-null)
 dt_registered (not-null)
 
 Список присоединяется к user
-List:
+ToDoList:
 id (PK)
 user (FK)
 title (not-null)
