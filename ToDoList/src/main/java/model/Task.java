@@ -30,6 +30,11 @@ public class Task {
     @Column
     private boolean is_completed;
 
+    /** Список, к которому относится дело */
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "list_id")
+    private ToDoList list;
+
     /** Дата и время регистрации*/
     @Column(updatable = false)
     private LocalDateTime dt_created;
@@ -50,12 +55,16 @@ public class Task {
     public Task() {
     }
 
-    public Task(String title) throws ValidationException {
+    public Task(String title, ToDoList list) throws ValidationException {
         if (Optional.ofNullable(title).orElse("").equals("")) {
             throw new ValidationException("Название дела не может быть пустым!");
         }
+        if (list == null) {
+            throw new ValidationException("Укажите родительский список дел!");
+        }
         this.title = title;
         this.is_completed = false;
+        this.list = list;
     }
 
     public static long getSerialVersionUID() {

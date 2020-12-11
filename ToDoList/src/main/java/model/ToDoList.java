@@ -3,6 +3,9 @@ package model;
 import javax.persistence.*;
 import javax.xml.bind.ValidationException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -11,7 +14,7 @@ import java.util.Optional;
 @Entity
 @Table(name="todolist")
 public class ToDoList implements Serializable {
-    private static final long serialVersionUID = 1;
+    private static final long serialVersionUID = 2;
 
     /** Идентификатор */
     @Id
@@ -27,6 +30,10 @@ public class ToDoList implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    /** Задачи списка*/
+    @OneToMany(mappedBy = "list", fetch = FetchType.EAGER)
+    private List<Task> tasks;
+
     public ToDoList() {
     }
 
@@ -39,6 +46,7 @@ public class ToDoList implements Serializable {
         }
         this.title = title;
         this.user = user;
+        this.tasks = new ArrayList<>();
     }
 
     public static long getSerialVersionUID() {
