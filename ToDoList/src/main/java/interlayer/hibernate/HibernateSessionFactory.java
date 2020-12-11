@@ -1,5 +1,6 @@
 package interlayer.hibernate;
 
+import model.ToDoList;
 import model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -24,6 +25,7 @@ public class HibernateSessionFactory {
     /** Метод добавления аннотированных классов моделей */
     private static void addAnnotatedClasses() {
         configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(ToDoList.class);
     }
 
     /** Метод создания {@link SessionFactory}*/

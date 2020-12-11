@@ -37,7 +37,7 @@ public class User implements Serializable {
     private String surname;
 
     /** Дата и время регистрации*/
-    @Column
+    @Column(updatable = false)
     private LocalDate dt_registered;
 
     /** Списки дел*/
