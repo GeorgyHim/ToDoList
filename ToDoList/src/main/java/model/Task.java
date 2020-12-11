@@ -56,7 +56,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(String title, ToDoList list) throws ValidationError {
+    protected Task(String title, ToDoList list) throws ValidationError {
         if (Optional.ofNullable(title).orElse("").equals("")) {
             throw new ValidationError("Название дела не может быть пустым!");
         }

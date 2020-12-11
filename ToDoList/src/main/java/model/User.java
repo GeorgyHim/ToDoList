@@ -52,7 +52,7 @@ public class User implements Serializable {
         dt_registered = LocalDate.now();
     }
 
-    public User(String email, String password, String name, String surname) {
+    private User(String email, String password, String name, String surname) {
         this.email = email;
         this.password = password;
         this.name = Optional.ofNullable(name).orElse("");
@@ -60,11 +60,11 @@ public class User implements Serializable {
         this.toDoLists = Collections.emptyList();
     }
 
-    public User(String email, String password) {
+    protected User(String email, String password) {
         this(email, password, "", "");
     }
 
-    public User(String email) {
+    protected User(String email) {
         this(email, "secret");
     }
 

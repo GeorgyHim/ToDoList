@@ -38,7 +38,7 @@ public class ToDoList implements Serializable {
     public ToDoList() {
     }
 
-    public ToDoList(String title, User user) throws ValidationError {
+    protected ToDoList(String title, User user) throws ValidationError {
         if (Optional.ofNullable(title).orElse("").equals("")) {
             throw new ValidationError("Название списка не может быть пустым!");
         }
