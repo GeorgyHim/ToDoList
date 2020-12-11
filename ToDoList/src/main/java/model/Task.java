@@ -71,4 +71,20 @@ public class Task {
     public LocalDateTime getDt_completed() {
         return dt_completed;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    public void setIs_completed(boolean is_completed) {
+        if (!this.is_completed && is_completed)
+            dt_completed = LocalDateTime.now();
+        if (this.is_completed && !is_completed)
+            dt_completed = null;
+        this.is_completed = is_completed;
+    }
 }
