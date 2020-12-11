@@ -52,7 +52,7 @@ public class User implements Serializable {
         dtRegistered = LocalDate.now();
     }
 
-    private User(String email, String password, String name, String surname) {
+    protected User(String email, String password, String name, String surname) {
         this.email = email;
         this.password = password;
         this.name = Optional.ofNullable(name).orElse("");

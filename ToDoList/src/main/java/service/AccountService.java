@@ -2,7 +2,6 @@ package service;
 
 import interlayer.dao.UserDAO;
 import model.User;
-import util.exception.UserAlreadyRegistered;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,19 +20,6 @@ public class AccountService {
     public AccountService() {
         userDAO = UserDAO.getInstance();
         this.authorizedUsers = new HashMap<>();
-    }
-
-    /**
-     * Метод регистрации нового пользователя
-     *
-     * @param newUser                   - Новый пользователь
-     * @throws UserAlreadyRegistered    - Исключение в ситуации когда указанный логин уже занят
-     */
-    public void registerNewUser(User newUser) throws UserAlreadyRegistered {
-        if (userDAO.getByField("email", newUser.getEmail()) != null)
-            throw new UserAlreadyRegistered();
-
-        userDAO.add(newUser);
     }
 
     /**

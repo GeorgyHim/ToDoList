@@ -4,6 +4,7 @@ import interlayer.dao.TaskDAO;
 import interlayer.dao.ToDoListDAO;
 import interlayer.dao.UserDAO;
 import model.User;
+import util.exception.UserAlreadyRegistered;
 import util.exception.ValidationError;
 
 /**
@@ -14,10 +15,35 @@ public class Creator {
     private static ToDoListDAO toDoListDAO = ToDoListDAO.getInstance();
     private static TaskDAO taskDAO = TaskDAO.getInstance();
 
-    public static User createUser(String email) {
+    /**
+     *
+     *
+     * @param email
+     * @return
+     * @throws UserAlreadyRegistered
+     */
+    public static User createUser(String email) throws UserAlreadyRegistered {
         User user = new User(email);
-        userDAO.add(user);
+        addUserToDB(user);
         return user;
+    }
+
+    public static User createUser(String email, String password) throws UserAlreadyRegistered {
+        User user = new User(email, password);
+        addUserToDB(user);
+        return user;
+    }
+
+    public static User createUser(String email, String password, String name, String surname) throws UserAlreadyRegistered {
+        User user = new User(email, password, name, surname);
+        addUserToDB(user);
+        return user;
+    }
+
+    public static void addUserToDB(User user) throws UserAlreadyRegistered {
+        if (userDAO.getByField("email", user.getEmail()) != null)
+            throw new UserAlreadyRegistered();
+        userDAO.add(user);
     }
 
     public static ToDoList createToDoList(String title, User user) throws ValidationError {
