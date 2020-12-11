@@ -1,5 +1,6 @@
 package servlet;
 
+import model.Creator;
 import model.User;
 import service.AccountService;
 import util.exception.UserAlreadyRegistered;
@@ -32,11 +33,10 @@ public class SignUpServlet extends AccountServlet {
             return;
         }
 
-        User user = new User(email, password, name, surname);
         try {
-            accountService.registerNewUser(user);
+            Creator.createUser(email, password, name, surname);
             response.getWriter().println(String.format("User %s registered", email));
-        } catch (UserAlreadyRegistered userAlreadyRegistered) {
+        } catch (UserAlreadyRegistered e) {
             response.getWriter().println(String.format("User %s already exist", email));
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
