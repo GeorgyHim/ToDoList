@@ -1,7 +1,8 @@
 package model;
 
+import util.exception.ValidationError;
+
 import javax.persistence.*;
-import javax.xml.bind.ValidationException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -55,12 +56,12 @@ public class Task {
     public Task() {
     }
 
-    public Task(String title, ToDoList list) throws ValidationException {
+    public Task(String title, ToDoList list) throws ValidationError {
         if (Optional.ofNullable(title).orElse("").equals("")) {
-            throw new ValidationException("Название дела не может быть пустым!");
+            throw new ValidationError("Название дела не может быть пустым!");
         }
         if (list == null) {
-            throw new ValidationException("Укажите родительский список дел!");
+            throw new ValidationError("Укажите родительский список дел!");
         }
         this.title = title;
         this.is_completed = false;

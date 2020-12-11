@@ -1,7 +1,8 @@
 package model;
 
+import util.exception.ValidationError;
+
 import javax.persistence.*;
-import javax.xml.bind.ValidationException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,12 +38,12 @@ public class ToDoList implements Serializable {
     public ToDoList() {
     }
 
-    public ToDoList(String title, User user) throws ValidationException {
+    public ToDoList(String title, User user) throws ValidationError {
         if (Optional.ofNullable(title).orElse("").equals("")) {
-            throw new ValidationException("Название списка не может быть пустым!");
+            throw new ValidationError("Название списка не может быть пустым!");
         }
         if (user == null) {
-            throw new ValidationException("Укажите создателя списка");
+            throw new ValidationError("Укажите создателя списка");
         }
         this.title = title;
         this.user = user;
