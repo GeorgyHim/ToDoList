@@ -1,5 +1,6 @@
 package servlet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import interlayer.dao.UserDAO;
 import model.Creator;
@@ -20,17 +21,18 @@ import java.util.Map;
 public class TestServlet extends HttpServlet {
 
     /** Сериализатор в Json */
-    private static Gson gson = new Gson();
+    ObjectMapper mapper = new ObjectMapper();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            User user = Creator.createUser("sa231");
+            String username = "sambady";
+            User user = Creator.createUser(username);
             ToDoList list = Creator.createToDoList("Common things", user);
             Task task = Creator.createTask("Some work", list);
             Map<String, Object> data = new HashMap<>();
-            data.put("user", UserDAO.getInstance().getByField("email", "atingo"));
-            returnData(response, gson.toJson(data));
+            data.put("user", UserDAO.getInstance().getByField("email", username));
+            returnData(response, mapper.writeValueAsString(data));
         } catch (UserAlreadyRegistered | ValidationError userAlreadyRegistered) {
             // TODO: Пока так. Вообще будет возвращаться 400 ошибка
             userAlreadyRegistered.printStackTrace();

@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -40,6 +42,7 @@ public class User implements Serializable {
 
     /** Списки дел*/
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Set<ToDoList> toDoLists;
 
     /**

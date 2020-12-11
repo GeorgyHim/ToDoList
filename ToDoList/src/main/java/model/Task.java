@@ -1,5 +1,6 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import util.exception.ValidationError;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class Task {
     /** Список, к которому относится дело */
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "list_id")
+    @JsonBackReference
     private ToDoList list;
 
     /** Дата и время регистрации*/

@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import util.exception.ValidationError;
 
 import javax.persistence.*;
@@ -26,10 +28,12 @@ public class ToDoList implements Serializable {
     /** Пользователь, которому принадлежит список дел */
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     /** Задачи списка*/
     @OneToMany(mappedBy = "list", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Set<Task> tasks;
 
     public ToDoList() {
