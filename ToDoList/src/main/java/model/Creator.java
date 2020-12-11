@@ -15,13 +15,6 @@ public class Creator {
     private static ToDoListDAO toDoListDAO = ToDoListDAO.getInstance();
     private static TaskDAO taskDAO = TaskDAO.getInstance();
 
-    /**
-     *
-     *
-     * @param email
-     * @return
-     * @throws UserAlreadyRegistered
-     */
     public static User createUser(String email) throws UserAlreadyRegistered {
         User user = new User(email);
         addUserToDB(user);
@@ -51,6 +44,12 @@ public class Creator {
         toDoListDAO.add(toDoList);
         addListToItsUser(toDoList);
         return toDoList;
+    }
+
+    public static Task createTask(String title, ToDoList list) throws ValidationError {
+        Task task = new Task(title, list);
+        taskDAO.add(task);
+        return task;
     }
 
 
