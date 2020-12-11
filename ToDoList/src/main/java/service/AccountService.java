@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Класс для управления аккаунтами пользователей
+ * Сервис управления аккаунтами пользователей
  */
 public class AccountService {
 
