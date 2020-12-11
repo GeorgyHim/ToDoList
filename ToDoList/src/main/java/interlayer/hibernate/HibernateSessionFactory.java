@@ -1,5 +1,6 @@
 package interlayer.hibernate;
 
+import model.Task;
 import model.ToDoList;
 import model.User;
 import org.hibernate.SessionFactory;
@@ -26,6 +27,7 @@ public class HibernateSessionFactory {
     private static void addAnnotatedClasses() {
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(ToDoList.class);
+        configuration.addAnnotatedClass(Task.class);
     }
 
     /** Метод создания {@link SessionFactory}*/
