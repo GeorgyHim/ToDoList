@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -41,7 +42,7 @@ public class User implements Serializable {
 
     /** Списки дел*/
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    public Collection<ToDoList> lists;
+    public Collection<ToDoList> toDoLists;
 
     /**
      * Метод автоматического добавления даты и времени регистрации
@@ -56,6 +57,7 @@ public class User implements Serializable {
         this.password = password;
         this.name = Optional.ofNullable(name).orElse("");
         this.surname = Optional.ofNullable(surname).orElse("");
+        this.toDoLists = Collections.emptyList();
     }
 
     public User(String email, String password) {
