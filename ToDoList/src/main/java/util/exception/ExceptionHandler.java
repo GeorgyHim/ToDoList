@@ -12,6 +12,8 @@ public class ExceptionHandler {
      * @throws IOException  -   Исключение во время записи сообщения в ресонс
      */
     public static void handleException(Exception e, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=utf-8");
+
         if (e instanceof UserAlreadyRegistered) {
             response.getWriter().println("User with specified email already exist");
             response.setStatus(HttpServletResponse.SC_CONFLICT);
@@ -25,5 +27,7 @@ public class ExceptionHandler {
         }
 
         e.printStackTrace();
+        response.getWriter().println(e.getMessage());
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
 }
