@@ -3,6 +3,7 @@ package servlet;
 import com.google.gson.Gson;
 import model.User;
 import service.AccountService;
+import servlet.base.AccountServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class AuthInfoEndServlet extends AccountServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        setContentType(response);
+        setHtmlContent(response);
 
         String sessionId = request.getSession().getId();
         User user = accountService.getAuthorizedUser(sessionId);
@@ -40,7 +41,7 @@ public class AuthInfoEndServlet extends AccountServlet {
      */
     @Override
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        setContentType(response);
+        setHtmlContent(response);
 
         String sessionId = request.getSession().getId();
         User user = accountService.getAuthorizedUser(sessionId);

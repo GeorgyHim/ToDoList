@@ -1,4 +1,4 @@
-package servlet;
+package servlet.base;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +8,7 @@ public abstract class BaseServlet extends HttpServlet {
     /**
      * Метод установления нужного типа контента для response
      */
-    protected void setContentType(HttpServletResponse response) {
+    protected void setHtmlContent(HttpServletResponse response) {
         response.setContentType("text/html;charset=utf-8");
     }
 

@@ -1,8 +1,8 @@
 package servlet;
 
 import model.Creator;
-import model.User;
 import service.AccountService;
+import servlet.base.AccountServlet;
 import util.exception.UserAlreadyRegistered;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ public class SignUpServlet extends AccountServlet {
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        setContentType(response);
+        setHtmlContent(response);
 
         String email = Optional.ofNullable(request.getParameter("email")).orElse("");
         String password = Optional.ofNullable(request.getParameter("password")).orElse("");

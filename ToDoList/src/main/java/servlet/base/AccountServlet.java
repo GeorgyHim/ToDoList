@@ -1,10 +1,6 @@
-package servlet;
+package servlet.base;
 
 import service.AccountService;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public abstract class AccountServlet extends BaseServlet {
 

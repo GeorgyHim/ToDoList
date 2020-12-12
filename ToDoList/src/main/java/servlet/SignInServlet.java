@@ -2,6 +2,7 @@ package servlet;
 
 import model.User;
 import service.AccountService;
+import servlet.base.AccountServlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ public class SignInServlet extends AccountServlet {
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        setContentType(response);
+        setHtmlContent(response);
 
         String email = Optional.ofNullable(request.getParameter("email")).orElse("");
         String password = Optional.ofNullable(request.getParameter("password")).orElse("");
