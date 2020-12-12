@@ -1,4 +1,4 @@
-package servlet;
+package servlet.auth;
 
 import model.Creator;
 import servlet.base.BaseServlet;

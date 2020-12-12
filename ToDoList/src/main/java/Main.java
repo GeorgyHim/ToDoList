@@ -3,8 +3,8 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import service.AccountService;
 import servlet.AuthInfoServlet;
-import servlet.SignInServlet;
-import servlet.SignUpServlet;
+import servlet.auth.SignInServlet;
+import servlet.auth.SignUpServlet;
 import servlet.test.TestServlet;
 
 public class Main {
