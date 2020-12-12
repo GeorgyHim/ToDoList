@@ -20,10 +20,11 @@ public abstract class BaseServlet extends HttpServlet {
     }
 
     /**
-     * Запись объекта user в response в формате json
+     * Метод записи в response данных в формате json
      */
-    protected void returnData(HttpServletResponse response, String data) throws IOException {
-        response.getWriter().println(data);
+    protected void returnData(HttpServletResponse response, String jsonData) throws IOException {
+        // TODO: Здесь устанавливать статус response
+        response.getWriter().println(jsonData);
         response.setStatus(HttpServletResponse.SC_OK);
     }
 }
