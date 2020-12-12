@@ -2,6 +2,8 @@ package servlet.base;
 
 import model.User;
 import service.AccountService;
+import util.exception.ExceptionHandler;
+import util.exception.UserNotAuthorized;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,14 +13,18 @@ import java.io.IOException;
 /**
  * Абстрактный сервлет для случаев, когда пользователь уже должен быть зарегистрирован
  */
-public abstract class UserServlet  extends AccountServlet{
+public abstract class UserServlet  extends AccountServlet {
     /** Авторизованный пользователь */
     protected User user;
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sessionId = req.getSession().getId();
-        this.user = AccountService.getInstance().getAuthorizedUser(sessionId);
+        try {
+            this.user = AccountService.getInstance().getAuthorizedUser(sessionId);
+        } catch (UserNotAuthorized userNotAuthorized) {
+            ExceptionHandler.handleException(userNotAuthorized, resp);
+        }
         super.service(req, resp);
     }
 }

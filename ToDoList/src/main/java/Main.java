@@ -2,7 +2,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import service.AccountService;
-import servlet.test.AuthInfoEndServlet;
+import servlet.AuthInfoServlet;
 import servlet.SignInServlet;
 import servlet.SignUpServlet;
 import servlet.test.TestServlet;
@@ -19,7 +19,7 @@ public class Main {
 
     private static Server createServer(int port) {
         ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        contextHandler.addServlet(new ServletHolder(new AuthInfoEndServlet()), "/api/auth/");
+        contextHandler.addServlet(new ServletHolder(new AuthInfoServlet()), "/api/auth/");
         contextHandler.addServlet(new ServletHolder(new SignInServlet()), "/signin");
         contextHandler.addServlet(new ServletHolder(new SignUpServlet()), "/signup");
         contextHandler.addServlet(new ServletHolder(new TestServlet()), "/test");

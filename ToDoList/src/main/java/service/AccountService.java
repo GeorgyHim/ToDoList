@@ -2,6 +2,7 @@ package service;
 
 import interlayer.dao.UserDAO;
 import model.User;
+import util.exception.UserNotAuthorized;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,8 +45,11 @@ public class AccountService {
      * @param sessionId - Идентификатор сессии пользователя
      * @return          - Найденный пользователь либо Null
      */
-    public User getAuthorizedUser(String sessionId) {
-        return  authorizedUsers.get(sessionId);
+    public User getAuthorizedUser(String sessionId) throws UserNotAuthorized {
+        User user = authorizedUsers.get(sessionId);
+        if (user == null)
+            throw new UserNotAuthorized();
+        return user;
     }
 
     /**

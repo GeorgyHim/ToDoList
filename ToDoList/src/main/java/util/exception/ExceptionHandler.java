@@ -26,6 +26,12 @@ public class ExceptionHandler {
             return;
         }
 
+        if (e instanceof UserNotAuthorized) {
+            response.getWriter().println("User not authorized");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
         e.printStackTrace();
         response.getWriter().println(e.getMessage());
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
