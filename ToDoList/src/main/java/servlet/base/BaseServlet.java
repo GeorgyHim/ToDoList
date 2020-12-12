@@ -4,6 +4,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Базовый сервлет с функциями записи данных в респонс
+ */
 public abstract class BaseServlet extends HttpServlet {
     /**
      * Метод установления контента типа HTML для response

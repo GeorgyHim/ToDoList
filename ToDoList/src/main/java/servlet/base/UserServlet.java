@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UserServlet  extends AccountServlet{
+/**
+ * Абстрактный сервлет для случаев, когда пользователь уже должен быть зарегистрирован
+ */
+public abstract class UserServlet  extends AccountServlet{
     /** Авторизованный пользователь */
     protected User user;
 
