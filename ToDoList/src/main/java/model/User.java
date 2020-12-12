@@ -1,6 +1,7 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import util.exception.ValidationError;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -53,8 +54,12 @@ public class User implements Serializable {
         dtRegistered = LocalDate.now();
     }
 
-    protected User(String email, String password, String name, String surname) {
-        // TODO: Переписать с проверкой и выбросом ValidationError
+    protected User(String email, String password, String name, String surname) throws ValidationError {
+        if (Optional.ofNullable(email).orElse("").equals(""))
+            throw new ValidationError("Email не может быть пустым!");
+        if (Optional.ofNullable(password).orElse("").equals(""))
+            throw new ValidationError("Пароль не может быть пустым!");
+
         this.email = email;
         this.password = password;
         this.name = Optional.ofNullable(name).orElse("");
@@ -62,11 +67,11 @@ public class User implements Serializable {
         this.toDoLists = new HashSet<>();
     }
 
-    protected User(String email, String password) {
+    protected User(String email, String password) throws ValidationError {
         this(email, password, "", "");
     }
 
-    protected User(String email) {
+    protected User(String email) throws ValidationError {
         this(email, "secret");
     }
 

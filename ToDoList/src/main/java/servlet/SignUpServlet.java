@@ -5,6 +5,7 @@ import service.AccountService;
 import servlet.base.AccountServlet;
 import util.exception.ExceptionHandler;
 import util.exception.UserAlreadyRegistered;
+import util.exception.ValidationError;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,22 +23,15 @@ public class SignUpServlet extends AccountServlet {
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // TODO: использовать проверку на уровне конструктора User
-
-        String email = Optional.ofNullable(request.getParameter("email")).orElse("");
-        String password = Optional.ofNullable(request.getParameter("password")).orElse("");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
-
-        if (email.isEmpty() || password.isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
 
         try {
             Creator.createUser(email, password, name, surname);
             returnData(response, String.format("User %s registered", email));
-        } catch (UserAlreadyRegistered e) {
+        } catch (UserAlreadyRegistered | ValidationError e) {
             ExceptionHandler.handleException(e, response);
         }
     }

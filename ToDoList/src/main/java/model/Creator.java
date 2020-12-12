@@ -15,19 +15,19 @@ public class Creator {
     private static ToDoListDAO toDoListDAO = ToDoListDAO.getInstance();
     private static TaskDAO taskDAO = TaskDAO.getInstance();
 
-    public static User createUser(String email) throws UserAlreadyRegistered {
+    public static User createUser(String email) throws UserAlreadyRegistered, ValidationError {
         User user = new User(email);
         addUserToDB(user);
         return user;
     }
 
-    public static User createUser(String email, String password) throws UserAlreadyRegistered {
+    public static User createUser(String email, String password) throws UserAlreadyRegistered, ValidationError {
         User user = new User(email, password);
         addUserToDB(user);
         return user;
     }
 
-    public static User createUser(String email, String password, String name, String surname) throws UserAlreadyRegistered {
+    public static User createUser(String email, String password, String name, String surname) throws UserAlreadyRegistered, ValidationError {
         User user = new User(email, password, name, surname);
         addUserToDB(user);
         return user;
