@@ -11,15 +11,21 @@ import java.util.Map;
  */
 public class AccountService {
 
+    private static AccountService accountService = new AccountService();
+
     /** Объект {@link UserDAO} для модели {@link User}*/
     private final UserDAO userDAO;
 
     /** Перечень авторизованных пользователей со связью sessionId-{@link User} */
     private final Map<String, User> authorizedUsers;
 
-    public AccountService() {
+    private AccountService() {
         userDAO = UserDAO.getInstance();
         this.authorizedUsers = new HashMap<>();
+    }
+
+    public static AccountService getInstance() {
+        return accountService;
     }
 
     /**

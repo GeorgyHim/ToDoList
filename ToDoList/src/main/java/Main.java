@@ -8,7 +8,7 @@ import servlet.SignUpServlet;
 import servlet.test.TestServlet;
 
 public class Main {
-    private static AccountService accountService = new AccountService();
+    private static AccountService accountService = AccountService.getInstance();
 
     public static void main(String[] args) throws Exception {
         Server server = createServer(8080);
@@ -19,9 +19,9 @@ public class Main {
 
     private static Server createServer(int port) {
         ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        contextHandler.addServlet(new ServletHolder(new AuthInfoEndServlet(accountService)), "/api/auth/");
-        contextHandler.addServlet(new ServletHolder(new SignInServlet(accountService)), "/signin");
-        contextHandler.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/signup");
+        contextHandler.addServlet(new ServletHolder(new AuthInfoEndServlet()), "/api/auth/");
+        contextHandler.addServlet(new ServletHolder(new SignInServlet()), "/signin");
+        contextHandler.addServlet(new ServletHolder(new SignUpServlet()), "/signup");
         contextHandler.addServlet(new ServletHolder(new TestServlet()), "/test");
         Server server = new Server(port);
         server.setHandler(contextHandler);

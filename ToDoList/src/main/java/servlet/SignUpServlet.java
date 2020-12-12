@@ -1,8 +1,7 @@
 package servlet;
 
 import model.Creator;
-import service.AccountService;
-import servlet.base.AccountServlet;
+import servlet.base.BaseServlet;
 import util.exception.ExceptionHandler;
 import util.exception.UserAlreadyRegistered;
 import util.exception.ValidationError;
@@ -10,13 +9,8 @@ import util.exception.ValidationError;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
-public class SignUpServlet extends AccountServlet {
-
-    public SignUpServlet(AccountService accountService) {
-        super(accountService);
-    }
+public class SignUpServlet extends BaseServlet {
 
     /**
      * Метод регистрации пользователя

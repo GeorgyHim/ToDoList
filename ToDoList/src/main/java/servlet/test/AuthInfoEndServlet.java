@@ -2,32 +2,23 @@ package servlet.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.User;
-import service.AccountService;
-import servlet.base.AccountServlet;
+import servlet.base.UserServlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AuthInfoEndServlet extends AccountServlet {
+public class AuthInfoEndServlet extends UserServlet {
 
     /** Сериализатор в Json */
     private static ObjectMapper mapper = new ObjectMapper();
-
-    public AuthInfoEndServlet(AccountService accountService) {
-        super(accountService);
-    }
 
     /**
      * Метод получения авторизованного пользователя
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        setHtmlContent(response);
-
-        String sessionId = request.getSession().getId();
-        User user = accountService.getAuthorizedUser(sessionId);
-        if (user == null) {
+        if (this.user == null) {
             response.getWriter().println("User not authorized");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
@@ -40,17 +31,11 @@ public class AuthInfoEndServlet extends AccountServlet {
      */
     @Override
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        setHtmlContent(response);
-
-        String sessionId = request.getSession().getId();
-        User user = accountService.getAuthorizedUser(sessionId);
-
-        if (user == null) {
+        if (this.user == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
-
-        accountService.logoutUser(sessionId);
+        accountService.logoutUser(request.getSession().getId());
         returnData(response, "Goodbye!");
     }
 }
