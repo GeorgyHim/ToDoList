@@ -2,10 +2,10 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import service.AccountService;
-import servlet.AuthInfoEndServlet;
+import servlet.test.AuthInfoEndServlet;
 import servlet.SignInServlet;
 import servlet.SignUpServlet;
-import servlet.TestServlet;
+import servlet.test.TestServlet;
 
 public class Main {
     private static AccountService accountService = new AccountService();

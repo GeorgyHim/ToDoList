@@ -1,4 +1,4 @@
-package servlet;
+package servlet.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interlayer.dao.UserDAO;
