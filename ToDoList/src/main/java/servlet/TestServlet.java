@@ -7,6 +7,7 @@ import model.Creator;
 import model.Task;
 import model.ToDoList;
 import model.User;
+import util.exception.ExceptionHandler;
 import util.exception.UserAlreadyRegistered;
 import util.exception.ValidationError;
 
@@ -34,8 +35,7 @@ public class TestServlet extends HttpServlet {
             data.put("user", UserDAO.getInstance().getByField("email", username));
             returnData(response, mapper.writeValueAsString(data));
         } catch (UserAlreadyRegistered | ValidationError e) {
-            // TODO: Пока так. Вообще будет возвращаться 400 ошибка
-            e.printStackTrace();
+            ExceptionHandler.handleException(e, response);
         }
     }
 
