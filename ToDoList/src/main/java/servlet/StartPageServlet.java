@@ -17,6 +17,7 @@ public class StartPageServlet extends AccountServlet {
         try {
             User user = AccountService.getInstance().getAuthorizedUser(sessionId);
             resp.sendRedirect("/tasks/all");
+            return;
         } catch (UserNotAuthorized ignored) {}
         super.service(req, resp);
     }
