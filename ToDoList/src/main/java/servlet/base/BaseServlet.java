@@ -6,10 +6,17 @@ import java.io.IOException;
 
 public abstract class BaseServlet extends HttpServlet {
     /**
-     * Метод установления нужного типа контента для response
+     * Метод установления контента типа HTML для response
      */
     protected void setHtmlContent(HttpServletResponse response) {
         response.setContentType("text/html;charset=utf-8");
+    }
+
+    /**
+     * Метод установления контента типа JSON для response
+     */
+    protected void setJsonContent(HttpServletResponse response) {
+        response.setContentType("application/json;charset=utf-8");
     }
 
     /**
