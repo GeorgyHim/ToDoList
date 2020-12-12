@@ -29,18 +29,18 @@ public class TestServlet extends HttpServlet {
             String username = "sambady";
             User user = Creator.createUser(username);
             ToDoList list = Creator.createToDoList("Common things", user);
-            Task task = Creator.createTask("Some work", list);
+            Creator.createTask("Some work", list);
             Map<String, Object> data = new HashMap<>();
             data.put("user", UserDAO.getInstance().getByField("email", username));
             returnData(response, mapper.writeValueAsString(data));
-        } catch (UserAlreadyRegistered | ValidationError userAlreadyRegistered) {
+        } catch (UserAlreadyRegistered | ValidationError e) {
             // TODO: Пока так. Вообще будет возвращаться 400 ошибка
-            userAlreadyRegistered.printStackTrace();
+            e.printStackTrace();
         }
     }
 
     /**
-     * Метод записи данных в response в формате json
+     * Метод записи данных в response
      */
     private void returnData(HttpServletResponse response, String data) throws IOException {
         response.setContentType("text/html;charset=utf-8");
