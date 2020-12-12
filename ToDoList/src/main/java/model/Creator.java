@@ -33,10 +33,11 @@ public class Creator {
         return user;
     }
 
-    public static void addUserToDB(User user) throws UserAlreadyRegistered {
+    public static void addUserToDB(User user) throws UserAlreadyRegistered, ValidationError {
         if (userDAO.getByField("email", user.getEmail()) != null)
             throw new UserAlreadyRegistered();
         userDAO.add(user);
+        createToDoList(ToDoList.defaultTitle, user);
     }
 
     public static ToDoList createToDoList(String title, User user) throws ValidationError {

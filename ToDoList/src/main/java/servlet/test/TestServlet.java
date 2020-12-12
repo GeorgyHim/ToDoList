@@ -24,10 +24,10 @@ public class TestServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            String username = "sambady";
+            String username = "Faka";
             User user = Creator.createUser(username);
-            ToDoList list = Creator.createToDoList("Common things", user);
-            Creator.createTask("Some work", list);
+            //ToDoList list = Creator.createToDoList("Common things", user);
+            Creator.createTask("Some work", user.getToDoLists().stream().findAny().get());
             Map<String, Object> data = new HashMap<>();
             data.put("user", UserDAO.getInstance().getByField("email", username));
             returnData(response, mapper.writeValueAsString(data));
