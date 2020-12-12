@@ -22,7 +22,7 @@ public class Task {
 
     /** Название */
     @Column(nullable = false)
-    private String title;
+    private String description;
 
     /** Номер дела в списке */
     @Column
@@ -57,14 +57,14 @@ public class Task {
     public Task() {
     }
 
-    protected Task(String title, ToDoList list) throws ValidationError {
-        if (Optional.ofNullable(title).orElse("").equals("")) {
-            throw new ValidationError("Название дела не может быть пустым!");
+    protected Task(String description, ToDoList list) throws ValidationError {
+        if (Optional.ofNullable(description).orElse("").equals("")) {
+            throw new ValidationError("Описание дела не может быть пустым!");
         }
         if (list == null) {
             throw new ValidationError("Укажите родительский список дел!");
         }
-        this.title = title;
+        this.description = description;
         this.completed = false;
         this.list = list;
     }
@@ -77,8 +77,8 @@ public class Task {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getDescription() {
+        return description;
     }
 
     public int getOrderNumber() {
@@ -101,8 +101,8 @@ public class Task {
         return dtCompleted;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setOrderNumber(int orderNumber) {

@@ -15,7 +15,7 @@ title (not-null)
 Task:
 id (PK)
 list (FK)
-title (not-null)
+description (not-null)
 order (int) 
 completed (boolean, default = false)
 dtCreated (not-null)
