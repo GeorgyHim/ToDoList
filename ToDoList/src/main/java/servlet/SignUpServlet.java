@@ -22,6 +22,9 @@ public class SignUpServlet extends AccountServlet {
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // TODO: использовать проверку на уровне конструктора User
+        // TODO: Организовать установку типа контента в одном месте
+
         setHtmlContent(response);
 
         String email = Optional.ofNullable(request.getParameter("email")).orElse("");

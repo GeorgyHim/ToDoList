@@ -54,6 +54,7 @@ public class User implements Serializable {
     }
 
     protected User(String email, String password, String name, String surname) {
+        // TODO: Переписать с проверкой и выбросом ValidationError
         this.email = email;
         this.password = password;
         this.name = Optional.ofNullable(name).orElse("");
