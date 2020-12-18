@@ -78,4 +78,17 @@ abstract class DAO<T> {
             transaction.commit();
         }
     }
+
+    /**
+     * Метод удаления объекта из БД
+     *
+     * @param object    -   объект
+     */
+    public void delete(T object) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.delete(object);
+            transaction.commit();
+        }
+    }
 }
