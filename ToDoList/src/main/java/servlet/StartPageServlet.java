@@ -18,7 +18,7 @@ public class StartPageServlet extends AccountServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sessionId = req.getSession().getId();
         try {
-            User user = AccountService.getInstance().getAuthorizedUser(sessionId);
+            AccountService.getInstance().getAuthorizedUser(sessionId);
             resp.sendRedirect("/tasks");
             return;
         } catch (UserNotAuthorized ignored) {}
