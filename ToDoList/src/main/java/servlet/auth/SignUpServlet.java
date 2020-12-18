@@ -5,14 +5,23 @@ import servlet._abstracts.BaseServlet;
 import util.exception.ExceptionHandler;
 import util.exception.UserAlreadyRegistered;
 import util.exception.ValidationError;
+import util.templater.PageGenerator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 
 public class SignUpServlet extends BaseServlet {
 
-    // TODO: doGet для отображения форм регистрации
+    /**
+     * Отображение страницы с формой для регистрации
+     */
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        setHtmlContent(resp);
+        resp.getWriter().println(PageGenerator.getInstance().renderPage("signup.html", Collections.emptyMap()));
+    }
 
     /**
      * Метод регистрации пользователя
