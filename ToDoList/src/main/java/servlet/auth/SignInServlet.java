@@ -24,7 +24,6 @@ public class SignInServlet extends AccountServlet {
             return;
         }
         accountService.loginUser(request.getSession().getId(), user);
-        // TODO: Сделать вместо этого редирект на "tasks/"
-        returnJsonData(response, "Authorized: " + email);
+        response.sendRedirect("/tasks");
     }
 }
