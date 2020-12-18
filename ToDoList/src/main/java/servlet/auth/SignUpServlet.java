@@ -26,7 +26,7 @@ public class SignUpServlet extends BaseServlet {
 
         try {
             Creator.createUser(email, password, name, surname);
-            returnData(response, String.format("User %s registered", email));
+            returnJsonData(response, String.format("User %s registered", email));
         } catch (UserAlreadyRegistered | ValidationError e) {
             ExceptionHandler.handleException(e, response);
         }

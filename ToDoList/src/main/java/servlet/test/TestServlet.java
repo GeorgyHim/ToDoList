@@ -3,7 +3,6 @@ package servlet.test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import interlayer.dao.UserDAO;
 import model.Creator;
-import model.ToDoList;
 import model.User;
 import servlet.base.BaseServlet;
 import util.exception.ExceptionHandler;
@@ -30,7 +29,7 @@ public class TestServlet extends BaseServlet {
             Creator.createTask("Some work", user.getToDoLists().stream().findAny().get());
             Map<String, Object> data = new HashMap<>();
             data.put("user", UserDAO.getInstance().getByField("email", username));
-            returnData(response, mapper.writeValueAsString(data));
+            returnJsonData(response, mapper.writeValueAsString(data));
         } catch (UserAlreadyRegistered | ValidationError e) {
             ExceptionHandler.handleException(e, response);
         }

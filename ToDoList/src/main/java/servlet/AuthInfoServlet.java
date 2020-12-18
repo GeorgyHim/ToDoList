@@ -17,7 +17,7 @@ public class AuthInfoServlet extends UserServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        returnData(response, mapper.writeValueAsString(user));
+        returnJsonData(response, mapper.writeValueAsString(user));
     }
 
     /**
@@ -26,6 +26,6 @@ public class AuthInfoServlet extends UserServlet {
     @Override
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         accountService.logoutUser(request.getSession().getId());
-        returnData(response, "Goodbye!");
+        returnJsonData(response, "Goodbye!");
     }
 }

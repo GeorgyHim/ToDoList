@@ -24,6 +24,6 @@ public class SignInServlet extends AccountServlet {
             return;
         }
         accountService.loginUser(request.getSession().getId(), user);
-        returnData(response, "Authorized: " + email);
+        returnJsonData(response, "Authorized: " + email);
     }
 }

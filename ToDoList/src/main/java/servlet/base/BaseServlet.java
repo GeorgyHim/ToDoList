@@ -25,7 +25,7 @@ public abstract class BaseServlet extends HttpServlet {
     /**
      * Метод записи в response данных в формате json
      */
-    protected void returnData(HttpServletResponse response, String jsonData) throws IOException {
+    protected void returnJsonData(HttpServletResponse response, String jsonData) throws IOException {
         setJsonContent(response);
         response.getWriter().println(jsonData);
         response.setStatus(HttpServletResponse.SC_OK);
