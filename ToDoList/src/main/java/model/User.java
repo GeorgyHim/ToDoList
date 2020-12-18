@@ -42,7 +42,7 @@ public class User implements Serializable {
     private LocalDate dtRegistered;
 
     /** Списки дел*/
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private Set<ToDoList> toDoLists;
 

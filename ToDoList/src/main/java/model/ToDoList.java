@@ -35,7 +35,7 @@ public class ToDoList implements Serializable {
     private User user;
 
     /** Задачи списка*/
-    @OneToMany(mappedBy = "list", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "list", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private Set<Task> tasks;
 
