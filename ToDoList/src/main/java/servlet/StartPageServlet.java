@@ -4,13 +4,16 @@ import model.User;
 import service.AccountService;
 import servlet.base.AccountServlet;
 import util.exception.UserNotAuthorized;
+import util.templater.PageGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 
 public class StartPageServlet extends AccountServlet {
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sessionId = req.getSession().getId();
@@ -23,8 +26,8 @@ public class StartPageServlet extends AccountServlet {
     }
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO: Сделать рендеринг шаблона страницы регистрации
-        super.doGet(req, resp);
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        setHtmlContent(resp);
+        resp.getWriter().println(PageGenerator.getInstance().renderPage("startPage.html", Collections.emptyMap()));
     }
 }
