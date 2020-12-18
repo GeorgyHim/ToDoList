@@ -32,6 +32,6 @@ public class Main {
         contextHandler.addServlet(new ServletHolder(new StartPageServlet()), "/");
         contextHandler.addServlet(new ServletHolder(new _AuthInfoServlet()), "/api/auth/");  //TODO: Убрать
         contextHandler.addServlet(new ServletHolder(new TestServlet()), "/test");           //TODO: Убрать
-        //contextHandler.addServlet(new ServletHolder(new _AuthInfoServlet()), "/tasks/all");
+        //contextHandler.addServlet(new ServletHolder(new _AuthInfoServlet()), "/tasks");
     }
 }
