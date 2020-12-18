@@ -23,12 +23,12 @@ public class TestServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            String username = "Faka";
-            User user = Creator.createUser(username);
+            String email = request.getParameter("email");
+            User user = Creator.createUser(email);
             //ToDoList list = Creator.createToDoList("Common things", user);
             Creator.createTask("Some work", user.getToDoLists().stream().findAny().get());
             Map<String, Object> data = new HashMap<>();
-            data.put("user", UserDAO.getInstance().getByField("email", username));
+            data.put("user", UserDAO.getInstance().getByField("email", email));
             returnJsonData(response, mapper.writeValueAsString(data));
         } catch (UserAlreadyRegistered | ValidationError e) {
             ExceptionHandler.handleException(e, response);
