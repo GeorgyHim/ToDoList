@@ -22,9 +22,9 @@ public abstract class UserServlet  extends AccountServlet {
         String sessionId = req.getSession().getId();
         try {
             this.user = AccountService.getInstance().getAuthorizedUser(sessionId);
+            super.service(req, resp);
         } catch (UserNotAuthorized userNotAuthorized) {
             ExceptionHandler.handleException(userNotAuthorized, resp);
         }
-        super.service(req, resp);
     }
 }
