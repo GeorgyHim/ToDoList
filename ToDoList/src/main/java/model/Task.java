@@ -33,7 +33,7 @@ public class Task {
     private boolean completed;
 
     /** Список, к которому относится дело */
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "list_id")
     @JsonBackReference
     private ToDoList list;

@@ -2,6 +2,8 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import util.exception.ValidationError;
 
 import javax.persistence.*;
@@ -29,13 +31,14 @@ public class ToDoList implements Serializable {
     private String title;
 
     /** Пользователь, которому принадлежит список дел */
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
 
     /** Задачи списка*/
-    @OneToMany(mappedBy = "list", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "list", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private Set<Task> tasks;
 
