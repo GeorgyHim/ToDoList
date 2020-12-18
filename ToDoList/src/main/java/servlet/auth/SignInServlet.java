@@ -17,7 +17,7 @@ public class SignInServlet extends AccountServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String email = Optional.ofNullable(request.getParameter("email")).orElse("");
         String password = Optional.ofNullable(request.getParameter("password")).orElse("");
-        User user = accountService.getUserByLogin(email);
+        User user = accountService.getUserByEmail(email);
         if (user == null || !user.getPassword().equals(password)) {
             response.getWriter().println("Unauthorized");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

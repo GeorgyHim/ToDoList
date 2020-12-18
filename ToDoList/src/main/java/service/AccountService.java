@@ -35,7 +35,7 @@ public class AccountService {
      * @param email - Email пользователя
      * @return      - Найденный пользователь либо Null
      */
-    public User getUserByLogin(String email) {
+    public User getUserByEmail(String email) {
         return userDAO.getByField("email", email);
     }
 
