@@ -10,7 +10,7 @@ import java.util.Collections;
 
 public class TasksServlet extends UserServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         setHtmlContent(resp);
         resp.getWriter().println(PageGenerator.getInstance().renderPage("tasks.html", Collections.emptyMap()));
     }

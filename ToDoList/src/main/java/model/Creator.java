@@ -3,7 +3,6 @@ package model;
 import interlayer.dao.TaskDAO;
 import interlayer.dao.ToDoListDAO;
 import interlayer.dao.UserDAO;
-import model.User;
 import util.exception.UserAlreadyRegistered;
 import util.exception.ValidationError;
 

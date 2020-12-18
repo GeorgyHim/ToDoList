@@ -13,13 +13,18 @@ import java.io.IOException;
 public class ProfileServlet extends UserServlet {
 
     @Override
-    public void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO: Обновить имя, фамилию или пароль
+        super.doPut(req, resp);
+    }
+
+    @Override
+    public void doDelete(HttpServletRequest req, HttpServletResponse resp) {
         try {
             String sessionId = req.getSession().getId();
             User user = accountService.getAuthorizedUser(sessionId);
             accountService.logoutUser(sessionId);
             UserDAO.getInstance().delete(user);
         } catch (UserNotAuthorized ignored) {}
-        int riga = 1;
     }
 }
