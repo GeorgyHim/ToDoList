@@ -8,6 +8,7 @@ import servlet.auth.SignInServlet;
 import servlet.auth.SignUpServlet;
 import servlet._test.TestServlet;
 import servlet.profile.LogoutServlet;
+import servlet.profile.ProfileServlet;
 import servlet.tasks.TasksServlet;
 
 public class Main {
@@ -36,6 +37,7 @@ public class Main {
         contextHandler.addServlet(new ServletHolder(new TasksServlet()), "/tasks");
 
         contextHandler.addServlet(new ServletHolder(new LogoutServlet()), "/profile/logout");
+        contextHandler.addServlet(new ServletHolder(new ProfileServlet()), "/profile");
 
         contextHandler.addServlet(new ServletHolder(new _AuthInfoServlet()), "/api/auth/");  //TODO: Убрать
         contextHandler.addServlet(new ServletHolder(new TestServlet()), "/test");           //TODO: Убрать
