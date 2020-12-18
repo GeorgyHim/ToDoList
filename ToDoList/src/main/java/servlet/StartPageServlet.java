@@ -21,4 +21,10 @@ public class StartPageServlet extends AccountServlet {
         } catch (UserNotAuthorized ignored) {}
         super.service(req, resp);
     }
+
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO: Сделать рендеринг шаблона страницы регистрации
+        super.doGet(req, resp);
+    }
 }

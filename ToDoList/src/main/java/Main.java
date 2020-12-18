@@ -20,15 +20,18 @@ public class Main {
 
     private static Server createServer(int port) {
         ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        contextHandler.addServlet(new ServletHolder(new AuthInfoServlet()), "/api/auth/");
-        contextHandler.addServlet(new ServletHolder(new SignInServlet()), "/signin");
-        contextHandler.addServlet(new ServletHolder(new SignUpServlet()), "/signup");
-        contextHandler.addServlet(new ServletHolder(new TestServlet()), "/test");
-
-        contextHandler.addServlet(new ServletHolder(new StartPageServlet()), "/");
-        contextHandler.addServlet(new ServletHolder(new AuthInfoServlet()), "/tasks/all");
+        setUrls(contextHandler);
         Server server = new Server(port);
         server.setHandler(contextHandler);
         return server;
+    }
+
+    private static void setUrls(ServletContextHandler contextHandler) {
+        contextHandler.addServlet(new ServletHolder(new SignInServlet()), "/signin");
+        contextHandler.addServlet(new ServletHolder(new SignUpServlet()), "/signup");
+        contextHandler.addServlet(new ServletHolder(new StartPageServlet()), "/");
+        contextHandler.addServlet(new ServletHolder(new AuthInfoServlet()), "/api/auth/");  //TODO: Убрать
+        contextHandler.addServlet(new ServletHolder(new TestServlet()), "/test");           //TODO: Убрать
+        //contextHandler.addServlet(new ServletHolder(new AuthInfoServlet()), "/tasks/all");
     }
 }

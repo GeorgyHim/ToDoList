@@ -12,6 +12,8 @@ import java.io.IOException;
 
 public class SignUpServlet extends BaseServlet {
 
+    // TODO: doGet для отображения форм регистрации
+
     /**
      * Метод регистрации пользователя
      */
