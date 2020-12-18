@@ -1,7 +1,7 @@
 package servlet.auth;
 
 import model.User;
-import servlet._abstracts.AccountServlet;
+import servlet.abstracts.AccountServlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

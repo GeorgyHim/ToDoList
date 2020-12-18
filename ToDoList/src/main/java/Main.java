@@ -2,11 +2,11 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import service.AccountService;
-import servlet.AuthInfoServlet;
+import servlet._AuthInfoServlet;
 import servlet.StartPageServlet;
 import servlet.auth.SignInServlet;
 import servlet.auth.SignUpServlet;
-import servlet.test.TestServlet;
+import servlet._test.TestServlet;
 
 public class Main {
     private static AccountService accountService = AccountService.getInstance();
@@ -30,8 +30,8 @@ public class Main {
         contextHandler.addServlet(new ServletHolder(new SignInServlet()), "/signin");
         contextHandler.addServlet(new ServletHolder(new SignUpServlet()), "/signup");
         contextHandler.addServlet(new ServletHolder(new StartPageServlet()), "/");
-        contextHandler.addServlet(new ServletHolder(new AuthInfoServlet()), "/api/auth/");  //TODO: Убрать
+        contextHandler.addServlet(new ServletHolder(new _AuthInfoServlet()), "/api/auth/");  //TODO: Убрать
         contextHandler.addServlet(new ServletHolder(new TestServlet()), "/test");           //TODO: Убрать
-        //contextHandler.addServlet(new ServletHolder(new AuthInfoServlet()), "/tasks/all");
+        //contextHandler.addServlet(new ServletHolder(new _AuthInfoServlet()), "/tasks/all");
     }
 }

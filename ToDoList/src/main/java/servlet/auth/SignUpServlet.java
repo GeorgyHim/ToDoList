@@ -1,7 +1,7 @@
 package servlet.auth;
 
 import model.Creator;
-import servlet._abstracts.BaseServlet;
+import servlet.abstracts.BaseServlet;
 import util.exception.ExceptionHandler;
 import util.exception.UserAlreadyRegistered;
 import util.exception.ValidationError;
