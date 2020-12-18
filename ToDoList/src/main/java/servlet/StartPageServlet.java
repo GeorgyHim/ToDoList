@@ -2,7 +2,7 @@ package servlet;
 
 import model.User;
 import service.AccountService;
-import servlet.base.AccountServlet;
+import servlet._abstracts.AccountServlet;
 import util.exception.UserNotAuthorized;
 import util.templater.PageGenerator;
 

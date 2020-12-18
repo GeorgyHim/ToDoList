@@ -1,4 +1,4 @@
-package servlet.base;
+package servlet._abstracts;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;

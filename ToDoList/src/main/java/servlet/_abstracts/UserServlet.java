@@ -1,4 +1,4 @@
-package servlet.base;
+package servlet._abstracts;
 
 import model.User;
 import service.AccountService;

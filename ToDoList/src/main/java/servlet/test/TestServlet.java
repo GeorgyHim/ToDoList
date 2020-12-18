@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import interlayer.dao.UserDAO;
 import model.Creator;
 import model.User;
-import servlet.base.BaseServlet;
+import servlet._abstracts.BaseServlet;
 import util.exception.ExceptionHandler;
 import util.exception.UserAlreadyRegistered;
 import util.exception.ValidationError;
