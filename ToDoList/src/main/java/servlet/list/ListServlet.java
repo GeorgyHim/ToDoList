@@ -7,7 +7,6 @@ import servlet.abstracts.UserServlet;
 import util.exception.ExceptionHandler;
 import util.exception.ValidationError;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -40,7 +39,7 @@ public class ListServlet extends UserServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
         String title = req.getParameter("title");
         Optional<ToDoList> toDoList =
                 this.user.getToDoLists().stream().filter(list -> list.getTitle().equals(title)).findFirst();
@@ -51,6 +50,27 @@ public class ListServlet extends UserServlet {
 
         ToDoListDAO.getInstance().delete(toDoList.get());
         user.getToDoLists().remove(toDoList.get());
+        resp.setStatus(HttpServletResponse.SC_OK);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) {
+        String title = req.getParameter("title");
+        Optional<ToDoList> toDoList =
+                this.user.getToDoLists().stream().filter(list -> list.getTitle().equals(title)).findFirst();
+        if (!toDoList.isPresent()) {
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
+        String newTitle = req.getParameter("newTitle");
+        if (title.equals(newTitle)) {
+            resp.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
+
+        toDoList.get().setTitle(newTitle);
+        ToDoListDAO.getInstance().update(toDoList.get());
         resp.setStatus(HttpServletResponse.SC_OK);
     }
 }
