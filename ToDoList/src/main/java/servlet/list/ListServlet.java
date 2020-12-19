@@ -1,7 +1,10 @@
 package servlet.list;
 
+import model.Manipulator;
 import model.ToDoList;
 import servlet.abstracts.UserServlet;
+import util.exception.ExceptionHandler;
+import util.exception.ValidationError;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,5 +24,16 @@ public class ListServlet extends UserServlet {
         }
         // TODO: Поработать над представлением данных
         returnJsonData(resp, mapper.writeValueAsString(toDoList.get()));
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String title = req.getParameter("title");
+        try {
+            Manipulator.createToDoList(title, this.user);
+            resp.setStatus(HttpServletResponse.SC_CREATED);
+        } catch (ValidationError validationError) {
+            ExceptionHandler.handleException(validationError, resp);
+        }
     }
 }
