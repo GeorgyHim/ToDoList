@@ -83,7 +83,7 @@ public class Task {
         return description;
     }
 
-    public int getOrderNumber() {
+    public Integer getOrderNumber() {
         return orderNumber;
     }
 
