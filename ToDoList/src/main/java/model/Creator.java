@@ -32,6 +32,13 @@ public class Creator {
         return user;
     }
 
+    /**
+     * Метод добавления объекта {@link User} в БД
+     *
+     * @param user                      -   пользователь
+     * @throws UserAlreadyRegistered    -   Исключение когда пользователь уже существует
+     * @throws ValidationError          -   Исключение при некорректных данных
+     */
     public static void addUserToDB(User user) throws UserAlreadyRegistered, ValidationError {
         if (userDAO.getByField("email", user.getEmail()) != null)
             throw new UserAlreadyRegistered();
@@ -53,7 +60,6 @@ public class Creator {
         TaskDAO.getInstance().update(task);
         return task;
     }
-
 
     /**
      * Метод добавления списка дел пользователю
