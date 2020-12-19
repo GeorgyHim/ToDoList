@@ -5,12 +5,19 @@ import model.ToDoList;
 import servlet.abstracts.UserServlet;
 import util.templater.PageGenerator;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
 public class TasksServlet extends UserServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+    }
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         List<Task> tasks = getFilteredTasks(req.getParameter("filter"));
