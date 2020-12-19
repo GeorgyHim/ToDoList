@@ -7,11 +7,19 @@
 </head>
 <body>
 
+<div>
+    Пользователь: ${user.getName()}
+</div>
+<br>
+<br>
+
 <form action="/profile/logout" method="post">
     <button type="submit">Выйти</button>
 </form>
-
+<br>
 <button id="delUser">Выйти и удалить пользователя</button>
+<br>
+<br>
 <div>
     <#include "menu.html">
 </div>
@@ -30,7 +38,7 @@
 </html>
 
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
     $("#delUser").click(function(){
         $.ajax({
             type: "DELETE",

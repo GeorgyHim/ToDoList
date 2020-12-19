@@ -8,10 +8,7 @@ import util.templater.PageGenerator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TasksServlet extends UserServlet {
     @Override
@@ -20,7 +17,11 @@ public class TasksServlet extends UserServlet {
         for (ToDoList toDoList : this.user.getToDoLists()) {
             tasks.addAll(toDoList.getTasks());
         }
-        Map<String, Object> data = Collections.singletonMap("taskList", tasks);
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("taskList", tasks);
+        data.put("user", this.user);
+
         setHtmlContent(resp);
         resp.getWriter().println(PageGenerator.getInstance().renderPage("tasks.html", data));
     }
