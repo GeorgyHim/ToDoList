@@ -1,6 +1,7 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import model.helper.DateGroup;
 import util.exception.ValidationError;
 
 import javax.persistence.*;
@@ -48,6 +49,9 @@ public class Task {
     @Column
     private LocalDateTime dtCompleted;
 
+    /** Планируемая дата выполнения */
+    private DateGroup dateGroup;
+
     /**
      * Метод автоматического добавления даты и времени создания и планирования
      */
@@ -70,6 +74,7 @@ public class Task {
         this.description = description;
         this.completed = false;
         this.list = list;
+        this.dateGroup = DateGroup.TODAY;
     }
 
     public static long getSerialVersionUID() {
@@ -104,6 +109,14 @@ public class Task {
         if (dtCompleted == null)
             return "";
         return dtCompleted.format(formatter);
+    }
+
+    public DateGroup getDateGroup() {
+        return dateGroup;
+    }
+
+    public void setDateGroup(DateGroup dateGroup) {
+        this.dateGroup = dateGroup;
     }
 
     public void setDescription(String description) {

@@ -48,9 +48,8 @@ public class TasksServlet extends UserServlet {
         // TODO: Фильтрация для today и week
 
 
-        // TODO: Отсортировать
-        //tasks.sort(Comparator.nullsLast(Comparator.comparing(Task::getDtPlanned))
-        //        .thenComparing(Comparator.comparing(Task::getOrderNumber).reversed()));
+        tasks.sort(Comparator.nullsLast(Comparator.comparing(Task::getDateGroup))
+                .thenComparing(Comparator.comparing(Task::getOrderNumber).reversed()));
         return tasks;
     }
 }
