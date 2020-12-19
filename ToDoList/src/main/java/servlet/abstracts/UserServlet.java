@@ -21,7 +21,7 @@ public abstract class UserServlet  extends AccountServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sessionId = req.getSession().getId();
         try {
-            this.user = AccountService.getInstance().getAuthorizedUser(sessionId);
+            this.user = accountService.getAuthorizedUser(sessionId);
             super.service(req, resp);
         } catch (UserNotAuthorized userNotAuthorized) {
             ExceptionHandler.handleException(userNotAuthorized, resp);

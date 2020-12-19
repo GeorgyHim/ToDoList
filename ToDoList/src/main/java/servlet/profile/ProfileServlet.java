@@ -14,28 +14,18 @@ public class ProfileServlet extends UserServlet {
 
     @Override
     public void doPut(HttpServletRequest req, HttpServletResponse resp) {
-        try {
-            User user = AccountService.getInstance().getAuthorizedUser(req.getSession().getId());
-            String name = req.getParameter("name");
-            String surname = req.getParameter("surname");
-            String password = req.getParameter("password");
-            Manipulator.Updater.updateUser(user, name, surname, password);
-            resp.setStatus(HttpServletResponse.SC_OK);
-        } catch (UserNotAuthorized userNotAuthorized) {
-            resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        }
+        String name = req.getParameter("name");
+        String surname = req.getParameter("surname");
+        String password = req.getParameter("password");
+        Manipulator.Updater.updateUser(this.user, name, surname, password);
+        resp.setStatus(HttpServletResponse.SC_OK);
     }
 
     @Override
     public void doDelete(HttpServletRequest req, HttpServletResponse resp) {
-        try {
-            String sessionId = req.getSession().getId();
-            User user = accountService.getAuthorizedUser(sessionId);
-            accountService.logoutUser(sessionId);
-            UserDAO.getInstance().delete(user);
-            resp.setStatus(HttpServletResponse.SC_OK);
-        } catch (UserNotAuthorized userNotAuthorized) {
-            resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        }
+        String sessionId = req.getSession().getId();
+        accountService.logoutUser(sessionId);
+        UserDAO.getInstance().delete(this.user);
+        resp.setStatus(HttpServletResponse.SC_OK);
     }
 }
