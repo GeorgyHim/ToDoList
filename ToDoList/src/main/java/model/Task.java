@@ -5,6 +5,7 @@ import util.exception.ValidationError;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 /**
@@ -93,12 +94,14 @@ public class Task {
         return completed;
     }
 
-    public LocalDateTime getDtCreated() {
-        return dtCreated;
+    public String getDtCreated() {
+        return dtCreated.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
-    public LocalDateTime getDtCompleted() {
-        return dtCompleted;
+    public String getDtCompleted() {
+        if (dtCompleted == null)
+            return "";
+        return dtCompleted.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     public void setDescription(String description) {

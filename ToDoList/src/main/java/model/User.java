@@ -1,7 +1,6 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import util.exception.ValidationError;
@@ -9,6 +8,7 @@ import util.exception.ValidationError;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -102,8 +102,8 @@ public class User implements Serializable {
         return surname;
     }
 
-    public LocalDate getDtRegistered() {
-        return dtRegistered;
+    public String getDtRegistered() {
+        return dtRegistered.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     public Set<ToDoList> getToDoLists() {
