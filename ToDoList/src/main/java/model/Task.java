@@ -48,6 +48,10 @@ public class Task {
     @Column
     private LocalDateTime dtCompleted;
 
+    /** Планируемое время */
+    @Column
+    private LocalDateTime dtPlanned;
+
     /**
      * Метод автоматического добавления даты и времени создания
      */
@@ -103,6 +107,16 @@ public class Task {
         if (dtCompleted == null)
             return "";
         return dtCompleted.format(formatter);
+    }
+
+    public String getDtPlanned() {
+        if (dtPlanned == null)
+            return "";
+        return dtPlanned.format(formatter);
+    }
+
+    public void setDtPlanned(LocalDateTime dtPlanned) {
+        this.dtPlanned = dtPlanned;
     }
 
     public void setDescription(String description) {
