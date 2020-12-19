@@ -6,14 +6,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<!--<form action="/profile/logout" method="post">-->
-<!--    <button type="submit">Выйти</button>-->
-<!--</form>-->
+
+<form action="/profile/logout" method="post">
+    <button type="submit">Выйти</button>
+</form>
+
 <button id="delUser">Выйти и удалить пользователя</button>
 <div>
     <#include "menu.html">
 </div>
-<div>${data}</div>
+<br>
+<ul>
+<#list taskList as elem>
+    <li>
+        ${elem.getDescription()}
+        <br>
+        ${elem.getOrderNumber()}
+    </li>
+</#list>
+</ul>
+
 </body>
 </html>
 

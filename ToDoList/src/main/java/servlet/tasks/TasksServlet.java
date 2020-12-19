@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class TasksServlet extends UserServlet {
     @Override
@@ -19,10 +20,8 @@ public class TasksServlet extends UserServlet {
         for (ToDoList toDoList : this.user.getToDoLists()) {
             tasks.addAll(toDoList.getTasks());
         }
-        String jsonData = mapper.writeValueAsString(tasks);
+        Map<String, Object> data = Collections.singletonMap("taskList", tasks);
         setHtmlContent(resp);
-        resp.getWriter().println(
-                PageGenerator.getInstance().renderPage("tasks.html", Collections.singletonMap("data", jsonData))
-        );
+        resp.getWriter().println(PageGenerator.getInstance().renderPage("tasks.html", data));
     }
 }
