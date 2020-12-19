@@ -1,7 +1,8 @@
 package servlet.auth;
 
 import model.Manipulator;
-import servlet.abstracts.BaseServlet;
+import model.User;
+import servlet.abstracts.AccountServlet;
 import util.exception.ExceptionHandler;
 import util.exception.UserAlreadyRegistered;
 import util.exception.ValidationError;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
 
-public class SignUpServlet extends BaseServlet {
+public class SignUpServlet extends AccountServlet {
 
     /**
      * Отображение страницы с формой для регистрации
@@ -34,8 +35,9 @@ public class SignUpServlet extends BaseServlet {
         String surname = request.getParameter("surname");
 
         try {
-            Manipulator.createUser(email, password, name, surname);
-            returnJsonData(response, String.format("User %s registered", email));
+            User user = Manipulator.createUser(email, password, name, surname);
+            accountService.loginUser(request.getSession().getId(), user);
+            response.sendRedirect("/");
         } catch (UserAlreadyRegistered | ValidationError e) {
             ExceptionHandler.handleException(e, response);
         }
