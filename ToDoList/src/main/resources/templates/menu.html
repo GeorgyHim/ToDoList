@@ -5,5 +5,29 @@
 <a href="/tasks?sort=today">Сегодня</a><br>
 
 <a href="/list?id=1">Дела</a>
+
+<br>
+<br>
+<div>
+    Сменить имя:
+    <form id="change_name" action="/profile">
+        Новое имя: <input type="text" name="name">
+        <input type="submit" value="Сменить имя">
+    </form>
+</div>
 </body>
 </html>
+
+<script>
+$("#change_name").submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "PUT",
+        url: $("#change_name").attr("action"),
+        data: $("#change_name").serialize(),
+        success: function() {
+            location.reload();
+        }
+    });
+});
+</script>
