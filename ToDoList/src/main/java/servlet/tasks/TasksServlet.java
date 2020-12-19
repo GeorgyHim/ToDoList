@@ -20,10 +20,9 @@ public class TasksServlet extends UserServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Task> tasks = getFilteredTasks(req.getParameter("filter"));
-
         Map<String, Object> data = new HashMap<>();
-        data.put("taskList", tasks);
+        List<Task> tasks = getFilteredTasks(req.getParameter("filter"));
+        putTasks(data, tasks);
         data.put("user", this.user);
 
         setHtmlContent(resp);
@@ -51,5 +50,16 @@ public class TasksServlet extends UserServlet {
         tasks.sort(Comparator.nullsLast(Comparator.comparing(Task::getDateGroup))
                 .thenComparing(Comparator.comparing(Task::getOrderNumber).reversed()));
         return tasks;
+    }
+
+    /**
+     * Метод группировки и добавления в мап задач
+     *
+     * @param data  -   Мап
+     * @param tasks -   Отобранные задачи
+     */
+    private void putTasks(Map<String, Object> data, List<Task> tasks) {
+        // TODO: Распихать в мап задачи по группам, типа:  data.put("today", tasksToday) и тд
+        data.put("taskList", tasks);
     }
 }

@@ -19,6 +19,7 @@ public class ListServlet extends UserServlet {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
+        // TODO: Поработать над представлением данных
         returnJsonData(resp, mapper.writeValueAsString(toDoList.get()));
     }
 }
