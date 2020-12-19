@@ -7,6 +7,7 @@ import servlet.StartPageServlet;
 import servlet.auth.SignInServlet;
 import servlet.auth.SignUpServlet;
 import servlet._test.TestServlet;
+import servlet.list.ListServlet;
 import servlet.profile.LogoutServlet;
 import servlet.profile.ProfileServlet;
 import servlet.tasks.TasksServlet;
@@ -35,6 +36,8 @@ public class Main {
         contextHandler.addServlet(new ServletHolder(new StartPageServlet()), "/");
 
         contextHandler.addServlet(new ServletHolder(new TasksServlet()), "/tasks");
+
+        contextHandler.addServlet(new ServletHolder(new ListServlet()), "/list");
 
         contextHandler.addServlet(new ServletHolder(new LogoutServlet()), "/profile/logout");
         contextHandler.addServlet(new ServletHolder(new ProfileServlet()), "/profile");
