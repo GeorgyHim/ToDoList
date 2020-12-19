@@ -9,9 +9,6 @@ import java.io.IOException;
 
 public class _AuthInfoServlet extends UserServlet {
 
-    /** Сериализатор в Json */
-    private static ObjectMapper mapper = new ObjectMapper();
-
     /**
      * Метод получения авторизованного пользователя
      */

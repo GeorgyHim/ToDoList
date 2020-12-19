@@ -1,5 +1,7 @@
 package servlet.abstracts;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -8,6 +10,10 @@ import java.io.IOException;
  * Базовый сервлет с функциями записи данных в респонс
  */
 public abstract class BaseServlet extends HttpServlet {
+
+    /** Сериализатор в Json */
+    protected static ObjectMapper mapper = new ObjectMapper();
+
     /**
      * Метод установления контента типа HTML для response
      */
