@@ -109,4 +109,16 @@ public class User implements Serializable {
     public Set<ToDoList> getToDoLists() {
         return toDoLists;
     }
+
+    protected void setPassword(String password) {
+        this.password = password;
+    }
+
+    protected void setName(String name) {
+        this.name = name;
+    }
+
+    protected void setSurname(String surname) {
+        this.surname = surname;
+    }
 }
