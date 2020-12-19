@@ -14,7 +14,7 @@ import java.util.*;
  * Список дел
  */
 @Entity
-@Table(name="todolist")
+@Table(name="todolist", uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "user_id"})})
 public class ToDoList implements Serializable {
     private static final long serialVersionUID = 2;
 
