@@ -10,7 +10,7 @@ dtRegistered (not-null)
 ToDoList:
 id (PK)
 user (FK)
-title (not-null)
+title (not-null, unique)
 
 Task:
 id (PK)
@@ -19,12 +19,16 @@ description (not-null)
 order (int) 
 completed (boolean, default = false)
 dtCreated (not-null)
-dtCompleted (mb null, default = null) 
+dtCompleted (mb null, default = null)
+dtPlanned (mb null, default = null)
 
 *drag_and_drop не должен выходить за пределы своего окна,
 *чтобы очерёдность номера менялась по одной
 Последовательность дел в списке формируется с хвоста. При добавлении
 номер присваивается максимальный, причем номер = id добавленного дела. 
+Также автоматически при создании делу выставляется дата планирования на сегодня.
+Таким образом дело автоматически добавляется на самый вверх
+
 При событии изменения порядка дел на приватный урл идет запрос, 
 состоящий из айдишников передвинутых дел и их новых номеров. 
 Новые номера вычисляются на фронтенде и оттуда летят на бэк. 

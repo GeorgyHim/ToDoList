@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import util.exception.ValidationError;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -50,15 +51,17 @@ public class Task {
 
     /** Планируемое время */
     @Column
-    private LocalDateTime dtPlanned;
+    private LocalDate dtPlanned;
 
     /**
-     * Метод автоматического добавления даты и времени создания
+     * Метод автоматического добавления даты и времени создания и планирования
      */
     @PrePersist
     protected void onCreate() {
         dtCreated = LocalDateTime.now();
+        dtPlanned = LocalDate.now();
     }
+
 
     public Task() {
     }
@@ -115,7 +118,7 @@ public class Task {
         return dtPlanned.format(formatter);
     }
 
-    public void setDtPlanned(LocalDateTime dtPlanned) {
+    public void setDtPlanned(LocalDate dtPlanned) {
         this.dtPlanned = dtPlanned;
     }
 
