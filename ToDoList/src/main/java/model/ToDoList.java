@@ -52,6 +52,9 @@ public class ToDoList implements Serializable {
         if (user == null) {
             throw new ValidationError("Укажите создателя списка");
         }
+        if (user.getToDoLists().stream().anyMatch(list -> list.getTitle().equals(title))) {
+            throw new ValidationError("Список с указанным именем уже существует");
+        }
         this.title = title;
         this.user = user;
         this.tasks = new HashSet<>();
