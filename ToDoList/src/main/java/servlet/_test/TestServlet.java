@@ -24,9 +24,9 @@ public class TestServlet extends BaseServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             String email = request.getParameter("email");
-            User user = Manipulator.Creator.createUser(email);
+            User user = Manipulator.createUser(email);
             //ToDoList list = Creator.createToDoList("Common things", user);
-            Manipulator.Creator.createTask("Some work", user.getToDoLists().stream().findAny().get());
+            Manipulator.createTask("Some work", user.getToDoLists().stream().findAny().get());
             Map<String, Object> data = new HashMap<>();
             data.put("user", UserDAO.getInstance().getByField("email", email));
             returnJsonData(response, mapper.writeValueAsString(data));

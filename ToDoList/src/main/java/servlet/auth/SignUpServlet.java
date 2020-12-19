@@ -34,7 +34,7 @@ public class SignUpServlet extends BaseServlet {
         String surname = request.getParameter("surname");
 
         try {
-            Manipulator.Creator.createUser(email, password, name, surname);
+            Manipulator.createUser(email, password, name, surname);
             returnJsonData(response, String.format("User %s registered", email));
         } catch (UserAlreadyRegistered | ValidationError e) {
             ExceptionHandler.handleException(e, response);
