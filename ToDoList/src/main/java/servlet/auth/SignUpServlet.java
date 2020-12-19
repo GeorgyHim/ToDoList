@@ -1,6 +1,6 @@
 package servlet.auth;
 
-import model.Creator;
+import model.Manipulator;
 import servlet.abstracts.BaseServlet;
 import util.exception.ExceptionHandler;
 import util.exception.UserAlreadyRegistered;
@@ -34,7 +34,7 @@ public class SignUpServlet extends BaseServlet {
         String surname = request.getParameter("surname");
 
         try {
-            Creator.createUser(email, password, name, surname);
+            Manipulator.Creator.createUser(email, password, name, surname);
             returnJsonData(response, String.format("User %s registered", email));
         } catch (UserAlreadyRegistered | ValidationError e) {
             ExceptionHandler.handleException(e, response);

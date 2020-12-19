@@ -1,7 +1,7 @@
 package servlet.profile;
 
 import interlayer.dao.UserDAO;
-import model.Updater;
+import model.Manipulator;
 import model.User;
 import service.AccountService;
 import servlet.abstracts.UserServlet;
@@ -19,7 +19,7 @@ public class ProfileServlet extends UserServlet {
             String name = req.getParameter("name");
             String surname = req.getParameter("surname");
             String password = req.getParameter("password");
-            Updater.updateUser(user, name, surname, password);
+            Manipulator.Updater.updateUser(user, name, surname, password);
             resp.setStatus(HttpServletResponse.SC_OK);
         } catch (UserNotAuthorized userNotAuthorized) {
             resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
