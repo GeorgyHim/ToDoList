@@ -41,13 +41,15 @@ public class TasksServlet extends UserServlet {
         for (ToDoList toDoList : this.user.getToDoLists()) {
             tasks.addAll(toDoList.getTasks());
         }
-        tasks.sort(Comparator.comparing(Task::getOrderNumber).reversed());
-
         if (filter == null || filter.isEmpty() || filter.equals("all"))
             return tasks;
 
         // TODO: Фильтрация для today и week
 
+
+        // Сортируем сначала по времени запланирования, потом по порядку
+        tasks.sort(Comparator.nullsLast(Comparator.comparing(Task::getDtPlanned))
+                .thenComparing(Comparator.comparing(Task::getOrderNumber).reversed()));
         return tasks;
     }
 }
