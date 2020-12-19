@@ -15,6 +15,7 @@ import java.util.Optional;
 @Table(name = "task")
 public class Task {
     private static final long serialVersionUID = 1;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /** Идентификатор */
     @Id
@@ -95,13 +96,13 @@ public class Task {
     }
 
     public String getDtCreated() {
-        return dtCreated.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return dtCreated.format(formatter);
     }
 
     public String getDtCompleted() {
         if (dtCompleted == null)
             return "";
-        return dtCompleted.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return dtCompleted.format(formatter);
     }
 
     public void setDescription(String description) {
