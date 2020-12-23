@@ -55,8 +55,8 @@ public class Manipulator {
                 throw new ValidationError("Список с указанным названием уже существует!");
     }
 
-    public static void updateTask(Task task, String descr, Integer order, Boolean completed) {
-        descr = Optional.of(descr).orElse("");
+    public static void updateTask(Task task, String descr, Integer order, String completed) {
+        descr = Optional.ofNullable(descr).orElse("");
 
         if (!descr.isEmpty())
             task.setDescription(descr);
@@ -65,7 +65,7 @@ public class Manipulator {
             task.setOrderNumber(order);
 
         if (completed != null)
-            task.setCompleted(completed);
+            task.setCompleted();
 
         taskDAO.update(task);
     }

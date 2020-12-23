@@ -127,11 +127,11 @@ public class Task {
         this.orderNumber = orderNumber;
     }
 
-    public void setCompleted(boolean completed) {
-        if (!this.completed && completed)
+    public void setCompleted() {
+        if (!this.completed)
             dtCompleted = LocalDateTime.now();
-        if (this.completed && !completed)
+        if (this.completed)
             dtCompleted = null;
-        this.completed = completed;
+        this.completed = !this.completed;
     }
 }

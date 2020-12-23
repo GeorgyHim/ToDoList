@@ -1,9 +1,11 @@
 <html lang="en">
 <body>
-${task.getDescription()}
+
+<span <#if task.isCompleted()>style="text-decoration: line-through"</#if>>${task.getDescription()}</span>
 
 <form class="completeTask" style="display: inline">
     <input type="hidden" name="id" value="${task.getId()}">
+    <input type="hidden" name="completed" value="">
     <input type="submit" value="Выполнить">
 </form>
 
@@ -14,5 +16,27 @@ ${task.getDescription()}
 </body>
 </html>
 <script>
+$(".completeTask").submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "PUT",
+        url: $(this).attr("action"),
+        data: $(this).serialize(),
+        success: function() {
+            location.href = "/";
+        }
+    });
+});
 
+$(".deleteTask").submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "DELETE",
+        url: $(this).attr("action"),
+        data: $(this).serialize(),
+        success: function() {
+            location.href = "/";
+        }
+    });
+});
 </script>

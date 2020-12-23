@@ -60,8 +60,16 @@ public class TasksServlet extends UserServlet {
         String order = req.getParameter("order");
         String completed = req.getParameter("completed");
 
+        Integer orderNum;
         try {
-            Manipulator.updateTask(task, descr, Integer.parseInt(order), Boolean.parseBoolean(completed));
+            orderNum = (order == null) ? null : Integer.parseInt(order);
+        } catch (NumberFormatException e) {
+            ExceptionHandler.handleException(new ValidationError("Неверный формат order"), resp);
+            return;
+        }
+
+        try {
+            Manipulator.updateTask(task, descr, orderNum, completed);
             resp.setStatus(HttpServletResponse.SC_OK);
         } catch (NumberFormatException e) {
             ExceptionHandler.handleException(new ValidationError("Неверный формат параметров"), resp);
