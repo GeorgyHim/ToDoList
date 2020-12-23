@@ -13,6 +13,7 @@
 <br><br>
 
 ${todolist.getTitle()}
+<button id="delList">Удалить список</button>
 <ul>
     <#list todolist.getTasks() as task >
     <li>
@@ -23,3 +24,17 @@ ${todolist.getTitle()}
 
 </body>
 </html>
+
+<script>
+$(document).ready(function() {
+    $("#delList").click(function(){
+        $.ajax({
+            type: "DELETE",
+            url: "/list?title=${todolist.getTitle()}",
+            success: function() {
+                location.href = "/";
+            }
+        })
+    });
+});
+</script>

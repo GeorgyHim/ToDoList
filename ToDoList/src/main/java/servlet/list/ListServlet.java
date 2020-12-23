@@ -47,15 +47,18 @@ public class ListServlet extends UserServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String title = req.getParameter("title");
+        if (title.equals(ToDoList.defaultTitle)) {
+            ExceptionHandler.handleException(new ValidationError("Нельзя удалить список по умолчанию"), resp);
+        }
+
         Optional<ToDoList> toDoList =
                 this.user.getToDoLists().stream().filter(list -> list.getTitle().equals(title)).findFirst();
         if (!toDoList.isPresent()) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-
         ToDoListDAO.getInstance().delete(toDoList.get());
         user.getToDoLists().remove(toDoList.get());
         resp.setStatus(HttpServletResponse.SC_OK);
