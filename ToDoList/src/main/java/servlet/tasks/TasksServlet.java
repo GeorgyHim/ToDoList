@@ -43,10 +43,10 @@ public class TasksServlet extends UserServlet {
             tasks.addAll(toDoList.getTasks());
         }
 
-        if (filter.equals("today"))
+        if (Objects.equals(filter, "today"))
             tasks = tasks.stream().filter(task -> task.getDateGroup() == DateGroup.TODAY).collect(Collectors.toList());
 
-        if (filter.equals("soon"))
+        if (Objects.equals(filter, "soon"))
             tasks = tasks.stream().filter(
                     task ->
                             task.getDateGroup() == DateGroup.TODAY ||
