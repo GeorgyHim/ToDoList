@@ -51,6 +51,7 @@ public class ListServlet extends UserServlet {
         String title = req.getParameter("title");
         if (title.equals(ToDoList.defaultTitle)) {
             ExceptionHandler.handleException(new ValidationError("Нельзя удалить список по умолчанию"), resp);
+            return;
         }
 
         Optional<ToDoList> toDoList =
