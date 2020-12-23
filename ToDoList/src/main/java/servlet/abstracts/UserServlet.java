@@ -1,7 +1,6 @@
 package servlet.abstracts;
 
 import model.User;
-import service.AccountService;
 import util.exception.ExceptionHandler;
 import util.exception.UserNotAuthorized;
 

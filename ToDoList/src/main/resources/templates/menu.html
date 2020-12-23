@@ -3,41 +3,43 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-Планы
-<ul>
-    <li><a href="/tasks?filter=all">Все задачи</a></li>
-    <li><a href="/tasks?filter=today">Сегодня</a></li>
-    <li><a href="/tasks?filter=soon">Ближайшие</a></li>
-</ul>
 
-Списки
-<ul>
-<#list user.getToDoLists() as todolist>
-    <li>
-        <a href="/list?title=${todolist.getTitle()}">Дела</a>
-    </li>
-</#list>
-</ul>
+<div class="menu" style="border: 2px solid black;">
+    Планы
+    <ul>
+        <li><a href="/tasks?filter=all">Все задачи</a></li>
+        <li><a href="/tasks?filter=today">Сегодня</a></li>
+        <li><a href="/tasks?filter=soon">Ближайшие</a></li>
+    </ul>
 
-<br>
-<div>
-    Сменить имя
-    <form id="change_name" action="/profile">
-        Новое имя: <input type="text" name="name">
-        <input type="submit" value="Сменить имя">
-    </form>
+    Списки
+    <ul>
+    <#list user.getToDoLists() as todolist>
+        <li>
+            <a href="/list?title=${todolist.getTitle()}">${todolist.getTitle()}</a>
+        </li>
+    </#list>
+    </ul>
+
+    <br>
+    <div>
+        Сменить имя
+        <form id="change_name" action="/profile">
+            Новое имя: <input type="text" name="name">
+            <input type="submit" value="Сменить имя">
+        </form>
+    </div>
+
+    <br>
+
+    <div>
+        Сменить пароль
+        <form id="change_pass" action="/profile">
+            Новый пароль: <input type="text" name="password">
+            <input type="submit" value="Сменить имя">
+        </form>
+    </div>
 </div>
-
-<br>
-
-<div>
-    Сменить пароль
-    <form id="change_pass" action="/profile">
-        Новый пароль: <input type="text" name="password">
-        <input type="submit" value="Сменить имя">
-    </form>
-</div>
-
 </body>
 </html>
 

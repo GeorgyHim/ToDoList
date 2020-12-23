@@ -5,6 +5,11 @@
     <title>ToDoList - Планы и задачи</title>
 </head>
 <body>
+<div>
+    <#include "menu.html">
+</div>
+
+<br>
 
 <div>
     Пользователь: ${user.getEmail()}
@@ -18,11 +23,7 @@
 <br>
 <button id="delUser">Удалить пользователя</button>
 
-<br><br>
-
-<div>
-    <#include "menu.html">
-</div>
+<br>
 
 <ul>
 <#list taskList as elem>
