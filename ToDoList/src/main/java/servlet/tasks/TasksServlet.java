@@ -2,6 +2,7 @@ package servlet.tasks;
 
 import model.Task;
 import model.ToDoList;
+import model.helper.DateGroup;
 import servlet.abstracts.UserServlet;
 import util.templater.PageGenerator;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TasksServlet extends UserServlet {
 
@@ -22,7 +24,7 @@ public class TasksServlet extends UserServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Map<String, Object> data = new HashMap<>();
         List<Task> tasks = getFilteredTasks(req.getParameter("filter"));
-        putTasks(data, tasks);
+        data.put("taskList", tasks);
         data.put("user", this.user);
 
         setHtmlContent(resp);
@@ -41,25 +43,19 @@ public class TasksServlet extends UserServlet {
             tasks.addAll(toDoList.getTasks());
         }
 
-        if (filter == null || filter.isEmpty() || filter.equals("all"))
-            return tasks;
+        if (filter.equals("today"))
+            tasks = tasks.stream().filter(task -> task.getDateGroup() == DateGroup.TODAY).collect(Collectors.toList());
 
-        // TODO: Фильтрация для today и week
-
+        if (filter.equals("soon"))
+            tasks = tasks.stream().filter(
+                    task ->
+                            task.getDateGroup() == DateGroup.TODAY ||
+                            task.getDateGroup() == DateGroup.TOMORROW ||
+                            task.getDateGroup() == DateGroup.UPCOMING
+            ).collect(Collectors.toList());
 
         tasks.sort(Comparator.nullsLast(Comparator.comparing(Task::getDateGroup))
                 .thenComparing(Comparator.comparing(Task::getOrderNumber).reversed()));
         return tasks;
-    }
-
-    /**
-     * Метод группировки и добавления в мап задач
-     *
-     * @param data  -   Мап
-     * @param tasks -   Отобранные задачи
-     */
-    private void putTasks(Map<String, Object> data, List<Task> tasks) {
-        // TODO: Распихать в мап задачи по группам, типа:  data.put("today", tasksToday) и тд
-        data.put("taskList", tasks);
     }
 }
