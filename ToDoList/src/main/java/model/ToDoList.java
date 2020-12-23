@@ -18,9 +18,6 @@ import java.util.*;
 public class ToDoList implements Serializable {
     private static final long serialVersionUID = 2;
 
-    /** Название списка по умолчанию */
-    public static String defaultTitle = "Дела";
-
     /** Идентификатор */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

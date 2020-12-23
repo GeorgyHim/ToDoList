@@ -19,6 +19,9 @@ import java.util.*;
 public class User implements Serializable {
     private static final long serialVersionUID = 2;
 
+    /** Название списка по умолчанию */
+    private static String defaultListTitle = "Дела";
+
     /** Идентификатор */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +52,10 @@ public class User implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private Set<ToDoList> toDoLists;
+
+    /** Название списка по умолчанию */
+    @Column
+    private String personalDefaultListTitle;
 
     /**
      * Метод автоматического добавления даты и времени регистрации
@@ -120,5 +127,15 @@ public class User implements Serializable {
 
     protected void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getPersonalDefaultListTitle() {
+        if (personalDefaultListTitle != null)
+            return personalDefaultListTitle;
+        return defaultListTitle;
+    }
+
+    public void setPersonalDefaultListTitle(String personalDefaultListTitle) {
+        this.personalDefaultListTitle = personalDefaultListTitle;
     }
 }
