@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>${todolist.getTitle()}</title>
+</head>
+<body>
+
+${todolist.getTitle()}
+<ul>
+    <#list todolist.getTasks() as task >
+    <li>
+        ${task.getDescription()}
+    </li>
+</#list>
+</ul>
+
+</body>
+</html>

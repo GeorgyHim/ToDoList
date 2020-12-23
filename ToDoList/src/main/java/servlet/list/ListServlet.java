@@ -6,10 +6,14 @@ import model.ToDoList;
 import servlet.abstracts.UserServlet;
 import util.exception.ExceptionHandler;
 import util.exception.ValidationError;
+import util.templater.PageGenerator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class ListServlet extends UserServlet {
@@ -23,8 +27,11 @@ public class ListServlet extends UserServlet {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        // TODO: Поработать над представлением данных
-        returnJsonData(resp, mapper.writeValueAsString(toDoList.get()));
+
+        setHtmlContent(resp);
+        resp.getWriter().println(PageGenerator.getInstance().renderPage(
+                "list.html", Collections.singletonMap("todolist", toDoList.get()))
+        );
     }
 
     @Override
