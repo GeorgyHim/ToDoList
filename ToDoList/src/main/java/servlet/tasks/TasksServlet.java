@@ -1,5 +1,6 @@
 package servlet.tasks;
 
+import interlayer.dao.TaskDAO;
 import model.Manipulator;
 import model.Task;
 import model.ToDoList;
@@ -10,7 +11,6 @@ import util.exception.ObjectNotFound;
 import util.exception.ValidationError;
 import util.templater.PageGenerator;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -42,18 +42,52 @@ public class TasksServlet extends UserServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String id = req.getParameter("id");
+        Long task_id;
+        try {
+             task_id = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            ExceptionHandler.handleException(new ValidationError("Неверный формат id"), resp);
+            return;
+        }
+
+        Task task = TaskDAO.getInstance().getById(task_id);
+        if (task == null || !task.getList().getUser().getEmail().equals(this.user.getEmail())) {
+            ExceptionHandler.handleException(new ObjectNotFound("Указанной задачи не существует"), resp);
+            return;
+        }
+
         String descr = req.getParameter("description");
         String order = req.getParameter("order");
         String completed = req.getParameter("completed");
 
         try {
-            Manipulator.updateTask(Long.parseLong(id), descr, Integer.parseInt(order), Boolean.parseBoolean(completed));
+            Manipulator.updateTask(task, descr, Integer.parseInt(order), Boolean.parseBoolean(completed));
             resp.setStatus(HttpServletResponse.SC_OK);
         } catch (NumberFormatException e) {
             ExceptionHandler.handleException(new ValidationError("Неверный формат параметров"), resp);
-        } catch (ObjectNotFound e) {
-            ExceptionHandler.handleException(e, resp);
         }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String id = req.getParameter("id");
+        Long task_id;
+        try {
+            task_id = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            ExceptionHandler.handleException(new ValidationError("Неверный формат id"), resp);
+            return;
+        }
+
+        Task task = TaskDAO.getInstance().getById(task_id);
+        if (task == null || !task.getList().getUser().getEmail().equals(this.user.getEmail())) {
+            ExceptionHandler.handleException(new ObjectNotFound("Указанной задачи не существует"), resp);
+            return;
+        }
+
+        task.getList().getTasks().remove(task);
+        TaskDAO.getInstance().delete(task);
+        resp.setStatus(HttpServletResponse.SC_OK);
     }
 
     @Override

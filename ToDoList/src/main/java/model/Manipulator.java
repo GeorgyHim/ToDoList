@@ -55,13 +55,8 @@ public class Manipulator {
                 throw new ValidationError("Список с указанным названием уже существует!");
     }
 
-    public static void updateTask(Long id, String descr, Integer order, Boolean completed) throws ObjectNotFound {
+    public static void updateTask(Task task, String descr, Integer order, Boolean completed) {
         descr = Optional.of(descr).orElse("");
-
-        Task task = taskDAO.getById(id);
-        if (task == null) {
-            throw new ObjectNotFound("Указанной задачи не существует");
-        }
 
         if (!descr.isEmpty())
             task.setDescription(descr);
@@ -71,6 +66,8 @@ public class Manipulator {
 
         if (completed != null)
             task.setCompleted(completed);
+
+        taskDAO.update(task);
     }
     //----------------------------------------------------------------------------------------------------
 
