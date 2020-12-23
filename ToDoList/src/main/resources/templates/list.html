@@ -12,8 +12,15 @@
 
 <br><br>
 
-${todolist.getTitle()}
+<div>${todolist.getTitle()}</div>
+
 <button id="delList">Удалить список</button>
+
+<form style="display: inline;" id="change_title" action="/list?title=${todolist.getTitle()}">
+    Новое название: <input type="text" name="newTitle">
+    <input type="submit" value="Изменить название">
+</form>
+
 <ul>
     <#list todolist.getTasks() as task >
     <li>
@@ -26,6 +33,18 @@ ${todolist.getTitle()}
 </html>
 
 <script>
+$("#change_title").submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "PUT",
+        url: $("#change_title").attr("action"),
+        data: $("#change_title").serialize(),
+        success: function() {
+            location.href = "/";
+        }
+    });
+});
+
 $(document).ready(function() {
     $("#delList").click(function(){
         $.ajax({
