@@ -49,7 +49,7 @@ public class ListServlet extends UserServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String title = req.getParameter("title");
-        if (title.equals(ToDoList.defaultTitle)) {
+        if (title.equals(this.user.getPersonalDefaultListTitle())) {
             ExceptionHandler.handleException(new ValidationError("Нельзя удалить список по умолчанию"), resp);
             return;
         }

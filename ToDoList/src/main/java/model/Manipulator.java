@@ -33,6 +33,7 @@ public class Manipulator {
     }
 
     public static void updateToDoList(ToDoList toDoList, String newTitle) throws ValidationError {
+        String oldTitle = toDoList.getTitle();
         String nTitle = Optional.ofNullable(newTitle).orElse("");
         if (toDoList.getTitle().equals(newTitle)) {
             return;
@@ -41,6 +42,10 @@ public class Manipulator {
                 toDoList.getUser().getToDoLists().stream().noneMatch(tdList -> tdList.getTitle().equals(nTitle))) {
             toDoList.setTitle(newTitle);
             toDoListDAO.update(toDoList);
+            if (oldTitle.equals(toDoList.getUser().getPersonalDefaultListTitle())) {
+                toDoList.getUser().setPersonalDefaultListTitle(nTitle);
+                userDAO.update(toDoList.getUser());
+            }
         }
         else
             if (nTitle.isEmpty())
@@ -97,7 +102,7 @@ public class Manipulator {
         if (userDAO.getByField("email", user.getEmail()) != null)
             throw new UserAlreadyRegistered();
         userDAO.add(user);
-        createToDoList(ToDoList.defaultTitle, user);
+        createToDoList(user.getPersonalDefaultListTitle(), user);
     }
 
     /**
