@@ -31,6 +31,12 @@ public class ExceptionHandler {
             return;
         }
 
+        if (e instanceof ObjectNotFound) {
+            response.getWriter().println(e.getMessage());
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
         e.printStackTrace();
         response.getWriter().println(e.getMessage());
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
