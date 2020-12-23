@@ -32,8 +32,7 @@ $(".deleteTask").submit(function(e) {
     e.preventDefault();
     $.ajax({
         type: "DELETE",
-        url: $(this).attr("action"),
-        data: $(this).serialize(),
+        url: "/tasks?id=${task.getId()}",
         success: function() {
             location.href = "/";
         }
