@@ -11,7 +11,6 @@ import util.templater.PageGenerator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -28,10 +27,12 @@ public class ListServlet extends UserServlet {
             return;
         }
 
+        Map<String, Object> data = new HashMap<>();
+        data.put("todolist", toDoList.get());
+        data.put("user", this.user);
+
         setHtmlContent(resp);
-        resp.getWriter().println(PageGenerator.getInstance().renderPage(
-                "list.html", Collections.singletonMap("todolist", toDoList.get()))
-        );
+        resp.getWriter().println(PageGenerator.getInstance().renderPage("list.html", data));
     }
 
     @Override
