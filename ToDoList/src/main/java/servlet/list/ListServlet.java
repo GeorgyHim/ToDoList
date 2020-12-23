@@ -66,7 +66,7 @@ public class ListServlet extends UserServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String title = req.getParameter("title");
         Optional<ToDoList> toDoList =
                 this.user.getToDoLists().stream().filter(list -> list.getTitle().equals(title)).findFirst();
@@ -76,13 +76,11 @@ public class ListServlet extends UserServlet {
         }
 
         String newTitle = req.getParameter("newTitle");
-        if (title.equals(newTitle)) {
+        try {
+            Manipulator.updateToDoList(toDoList.get(), newTitle);
             resp.setStatus(HttpServletResponse.SC_OK);
-            return;
+        } catch (ValidationError e) {
+            ExceptionHandler.handleException(e, resp);
         }
-
-        toDoList.get().setTitle(newTitle);
-        ToDoListDAO.getInstance().update(toDoList.get());
-        resp.setStatus(HttpServletResponse.SC_OK);
     }
 }
