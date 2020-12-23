@@ -31,6 +31,23 @@ public class Manipulator {
 
         userDAO.update(user);
     }
+
+    public static void updateToDoList(ToDoList toDoList, String newTitle) throws ValidationError {
+        String nTitle = Optional.ofNullable(newTitle).orElse("");
+        if (toDoList.getTitle().equals(newTitle)) {
+            return;
+        }
+        if (!nTitle.isEmpty() &&
+                toDoList.getUser().getToDoLists().stream().noneMatch(tdList -> tdList.getTitle().equals(nTitle))) {
+            toDoList.setTitle(newTitle);
+            toDoListDAO.update(toDoList);
+        }
+        else
+            if (nTitle.isEmpty())
+                throw new ValidationError("Название списка не может быть пустым!");
+            else
+                throw new ValidationError("Список с указанным названием уже существует!");
+    }
     //----------------------------------------------------------------------------------------------------
 
     // ----- CREATE methods -----
