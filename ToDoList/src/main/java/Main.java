@@ -40,6 +40,4 @@ public class Main {
         contextHandler.addServlet(new ServletHolder(new LogoutServlet()), "/profile/logout");
         contextHandler.addServlet(new ServletHolder(new ProfileServlet()), "/profile");
     }
-
-    // TODO: Создать интерфейс для удаления списка на странице списка
 }

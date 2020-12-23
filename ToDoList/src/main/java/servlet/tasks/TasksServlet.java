@@ -17,6 +17,7 @@ public class TasksServlet extends UserServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO: Реализовать
         super.doPost(req, resp);
     }
 
