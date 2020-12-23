@@ -86,6 +86,7 @@ public class Manipulator {
         taskDAO.add(task);
         task.setOrderNumber((int) task.getId());
         TaskDAO.getInstance().update(task);
+        list.getTasks().add(task);
         return task;
     }
     //----------------------------------------------------------------------------------------------------

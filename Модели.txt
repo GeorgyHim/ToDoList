@@ -20,7 +20,7 @@ order (int)
 completed (boolean, default = false)
 dtCreated (not-null)
 dtCompleted (mb null, default = null)
-dtPlanned (mb null, default = null)
+***dtPlanned (mb null, default = null)
 
 *drag_and_drop не должен выходить за пределы своего окна,
 *чтобы очерёдность номера менялась по одной

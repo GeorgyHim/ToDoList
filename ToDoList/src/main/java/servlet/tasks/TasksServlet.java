@@ -1,12 +1,14 @@
 package servlet.tasks;
 
+import model.Manipulator;
 import model.Task;
 import model.ToDoList;
 import model.helper.DateGroup;
 import servlet.abstracts.UserServlet;
+import util.exception.ExceptionHandler;
+import util.exception.ValidationError;
 import util.templater.PageGenerator;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -16,9 +18,23 @@ import java.util.stream.Collectors;
 public class TasksServlet extends UserServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO: Реализовать
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String title = req.getParameter("title");
+        String description = req.getParameter("description");
+
+        Optional<ToDoList> toDoList =
+                this.user.getToDoLists().stream().filter(tdList -> tdList.getTitle().equals(title)).findFirst();
+        if (!toDoList.isPresent()) {
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+        try {
+            Manipulator.createTask(description, toDoList.get());
+            resp.setStatus(HttpServletResponse.SC_CREATED);
+            resp.sendRedirect("/");
+        } catch (ValidationError e) {
+            ExceptionHandler.handleException(e, resp);
+        }
     }
 
     @Override
