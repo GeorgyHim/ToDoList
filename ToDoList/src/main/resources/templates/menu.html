@@ -5,9 +5,11 @@
 <body>
 
 <div class="menu" style="border: 2px solid black;">
-    <div>
-        Пользователь: ${user.getEmail()}
-    </div>
+    Пользователь: ${user.getEmail()}
+
+    <form action="/profile/logout" method="post">
+        <input type="submit" value="Выйти">
+    </form>
 
     <br>
 
