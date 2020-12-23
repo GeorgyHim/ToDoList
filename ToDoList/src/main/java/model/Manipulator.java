@@ -3,6 +3,7 @@ package model;
 import interlayer.dao.TaskDAO;
 import interlayer.dao.ToDoListDAO;
 import interlayer.dao.UserDAO;
+import util.exception.ObjectNotFound;
 import util.exception.UserAlreadyRegistered;
 import util.exception.ValidationError;
 
@@ -52,6 +53,24 @@ public class Manipulator {
                 throw new ValidationError("Название списка не может быть пустым!");
             else
                 throw new ValidationError("Список с указанным названием уже существует!");
+    }
+
+    public static void updateTask(Long id, String descr, Integer order, Boolean completed) throws ObjectNotFound {
+        descr = Optional.of(descr).orElse("");
+
+        Task task = taskDAO.getById(id);
+        if (task == null) {
+            throw new ObjectNotFound("Указанной задачи не существует");
+        }
+
+        if (!descr.isEmpty())
+            task.setDescription(descr);
+
+        if (order != null)
+            task.setOrderNumber(order);
+
+        if (completed != null)
+            task.setCompleted(completed);
     }
     //----------------------------------------------------------------------------------------------------
 

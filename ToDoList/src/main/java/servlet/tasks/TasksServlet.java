@@ -6,9 +6,11 @@ import model.ToDoList;
 import model.helper.DateGroup;
 import servlet.abstracts.UserServlet;
 import util.exception.ExceptionHandler;
+import util.exception.ObjectNotFound;
 import util.exception.ValidationError;
 import util.templater.PageGenerator;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -33,6 +35,23 @@ public class TasksServlet extends UserServlet {
             resp.setStatus(HttpServletResponse.SC_CREATED);
             resp.sendRedirect("/");
         } catch (ValidationError e) {
+            ExceptionHandler.handleException(e, resp);
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String id = req.getParameter("id");
+        String descr = req.getParameter("description");
+        String order = req.getParameter("order");
+        String completed = req.getParameter("completed");
+
+        try {
+            Manipulator.updateTask(Long.parseLong(id), descr, Integer.parseInt(order), Boolean.parseBoolean(completed));
+            resp.setStatus(HttpServletResponse.SC_OK);
+        } catch (NumberFormatException e) {
+            ExceptionHandler.handleException(new ValidationError("Неверный формат параметров"), resp);
+        } catch (ObjectNotFound e) {
             ExceptionHandler.handleException(e, resp);
         }
     }
