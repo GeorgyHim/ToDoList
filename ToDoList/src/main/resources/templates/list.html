@@ -24,7 +24,7 @@
 <ul>
     <#list todolist.getTasks() as task >
     <li>
-        ${task.getDescription()}
+        <#include "_taskList.html">
     </li>
 </#list>
 </ul>

@@ -20,9 +20,9 @@
 <br>
 
 <ul>
-<#list taskList as elem>
+<#list taskList as task>
     <li>
-        ${elem.getDescription()}
+        <#include "_taskList.html">
     </li>
 </#list>
 </ul>

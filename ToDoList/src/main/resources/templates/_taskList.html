@@ -1,0 +1,18 @@
+<html lang="en">
+<body>
+${task.getDescription()}
+
+<form class="completeTask" style="display: inline">
+    <input type="hidden" name="id" value="${task.getId()}">
+    <input type="submit" value="Выполнить">
+</form>
+
+<form class="deleteTask" style="display: inline">
+    <input type="hidden" name="id" value="${task.getId()}">
+    <input type="submit" value="Удалить">
+</form>
+</body>
+</html>
+<script>
+
+</script>
