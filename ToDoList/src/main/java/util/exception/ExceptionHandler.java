@@ -27,8 +27,7 @@ public class ExceptionHandler {
         }
 
         if (e instanceof UserNotAuthorized) {
-            response.getWriter().println("User not authorized");
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.sendRedirect("/");
             return;
         }
 
