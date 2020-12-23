@@ -33,6 +33,9 @@ $(document).ready(function() {
             url: "/list?title=${todolist.getTitle()}",
             success: function() {
                 location.href = "/";
+            },
+            error: function() {
+                alert('Невозможно удалить');
             }
         })
     });
