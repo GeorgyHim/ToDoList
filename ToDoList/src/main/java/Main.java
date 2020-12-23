@@ -2,11 +2,9 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import service.AccountService;
-import servlet._AuthInfoServlet;
 import servlet.StartPageServlet;
 import servlet.auth.SignInServlet;
 import servlet.auth.SignUpServlet;
-import servlet._test.TestServlet;
 import servlet.list.ListServlet;
 import servlet.profile.LogoutServlet;
 import servlet.profile.ProfileServlet;
@@ -41,9 +39,5 @@ public class Main {
 
         contextHandler.addServlet(new ServletHolder(new LogoutServlet()), "/profile/logout");
         contextHandler.addServlet(new ServletHolder(new ProfileServlet()), "/profile");
-
-        contextHandler.addServlet(new ServletHolder(new _AuthInfoServlet()), "/api/auth/");  //TODO: Убрать
-        contextHandler.addServlet(new ServletHolder(new TestServlet()), "/test");           //TODO: Убрать
-
     }
 }
