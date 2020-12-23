@@ -1,20 +1,41 @@
 <html lang="en">
 <body>
-<a href="/tasks?sort=all">Все задачи</a><br>
-<a href="/tasks?sort=week">Неделя</a><br>
-<a href="/tasks?sort=today">Сегодня</a><br>
+Планы
+<ul>
+    <li><a href="/tasks?sort=all">Все задачи</a></li>
+    <li><a href="/tasks?sort=week">Неделя</a></li>
+    <li><a href="/tasks?sort=today">Сегодня</a></li>
+</ul>
 
-<a href="/list?id=1">Дела</a>
+Списки
+<ul>
+<#list user.getToDoLists() as todolist>
+    <li>
+        <a href="/list?title=${todolist.getTitle()}">Дела</a>
+    </li>
+</#list>
+</ul>
 
 <br>
 <br>
 <div>
-    Сменить имя:
+    Сменить имя
     <form id="change_name" action="/profile">
         Новое имя: <input type="text" name="name">
         <input type="submit" value="Сменить имя">
     </form>
 </div>
+
+<br>
+
+<div>
+    Сменить пароль
+    <form id="change_pass" action="/profile">
+        Новый пароль: <input type="text" name="password">
+        <input type="submit" value="Сменить имя">
+    </form>
+</div>
+
 </body>
 </html>
 
@@ -25,6 +46,18 @@ $("#change_name").submit(function(e) {
         type: "PUT",
         url: $("#change_name").attr("action"),
         data: $("#change_name").serialize(),
+        success: function() {
+            location.reload();
+        }
+    });
+});
+
+$("#change_pass").submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "PUT",
+        url: $("#change_pass").attr("action"),
+        data: $("#change_pass").serialize(),
         success: function() {
             location.reload();
         }

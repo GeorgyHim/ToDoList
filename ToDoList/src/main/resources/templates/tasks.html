@@ -8,22 +8,23 @@
 <body>
 
 <div>
-    Пользователь: ${user.getName()}
+    Пользователь: ${user.getEmail()}
 </div>
-<br>
-<br>
+
+<br><br>
 
 <form action="/profile/logout" method="post">
     <button type="submit">Выйти</button>
 </form>
 <br>
-<button id="delUser">Выйти и удалить пользователя</button>
-<br>
-<br>
+<button id="delUser">Удалить пользователя</button>
+
+<br><br>
+
 <div>
     <#include "menu.html">
 </div>
-<br>
+
 <ul>
 <#list taskList as elem>
     <li>
