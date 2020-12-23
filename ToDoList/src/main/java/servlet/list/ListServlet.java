@@ -41,6 +41,7 @@ public class ListServlet extends UserServlet {
         try {
             Manipulator.createToDoList(title, this.user);
             resp.setStatus(HttpServletResponse.SC_CREATED);
+            resp.sendRedirect("/");
         } catch (ValidationError validationError) {
             ExceptionHandler.handleException(validationError, resp);
         }
