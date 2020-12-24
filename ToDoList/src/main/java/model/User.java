@@ -49,6 +49,7 @@ public class User implements Serializable {
 
     /** Списки дел*/
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OrderBy("title")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private Set<ToDoList> toDoLists;
