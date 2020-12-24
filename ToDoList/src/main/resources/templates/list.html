@@ -53,7 +53,7 @@ $("#change_title").submit(function(e) {
 });
 
 $(document).ready(function() {
-    $("#delList").click(function(){
+    $("#delList").click(function(){com
         $.ajax({
             type: "DELETE",
             url: "/list?title=${todolist.getTitle()}",
@@ -81,6 +81,7 @@ $("#postTask").submit(function(e) {
 
 $(".completeTask").submit(function(e) {
     console.log("Sending put");
+    e.preventDefault();
     $.ajax({
         type: "PUT",
         url: $(this).attr("action"),

@@ -3,7 +3,7 @@
 
 <span <#if task.isCompleted()>style="text-decoration: line-through"</#if>>${task.getDescription()}</span>
 
-<form class="completeTask" style="display: inline">
+<form action="/tasks" class="completeTask" style="display: inline">
     <input type="hidden" name="id" value="${task.getId()}">
     <input type="hidden" name="completed" value="">
     <input type="submit" value="Выполнить">

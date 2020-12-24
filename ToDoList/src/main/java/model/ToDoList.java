@@ -36,6 +36,7 @@ public class ToDoList implements Serializable {
     /** Задачи списка*/
     @OneToMany(mappedBy = "list", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @OrderBy("orderNumber DESC")
     @JsonManagedReference
     private Set<Task> tasks;
 
