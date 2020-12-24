@@ -15,18 +15,8 @@
 </form>
 </body>
 </html>
+
 <script>
-$(".completeTask").submit(function(e) {
-    e.preventDefault();
-    $.ajax({
-        type: "PUT",
-        url: $(this).attr("action"),
-        data: $(this).serialize(),
-        success: function() {
-            location.href = "/";
-        }
-    });
-});
 
 $(".deleteTask").submit(function(e) {
     e.preventDefault();
@@ -34,7 +24,7 @@ $(".deleteTask").submit(function(e) {
         type: "DELETE",
         url: "/tasks?id=${task.getId()}",
         success: function() {
-            location.href = "/";
+        location.reload();
         }
     });
 });
