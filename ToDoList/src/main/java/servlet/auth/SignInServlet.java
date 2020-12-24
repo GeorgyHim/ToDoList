@@ -19,8 +19,7 @@ public class SignInServlet extends AccountServlet {
         String password = Optional.ofNullable(request.getParameter("password")).orElse("");
         User user = accountService.getUserByEmail(email);
         if (user == null || !user.getPassword().equals(password)) {
-            response.getWriter().println("Unauthorized");
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.sendRedirect("/");
             return;
         }
         accountService.loginUser(request.getSession().getId(), user);
