@@ -48,26 +48,23 @@ header{
     width: 20%;
     float: left;
 }
+
+.form {
+    position: absolute;
+    top: 60%;
+    left: 40%;
+}
+
 .banner-text{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #fff;
+    color: rgb(6, 31, 94);
     text-align: center;
 }
-.banner-text h2{
-    font-family: baloo;
-    margin: 0;
-    font-size: 55px;
-    color: rgb(133, 161, 163);
-}
-.banner-text p{
-    font-size: 22px;
-    margin: 0;
-    font-family: poppins;
-}
-.banner-text a{
+.banner-text button {
+    background: transparent;
     text-decoration: none;
     border: 1px solid #fff;
     font-size: 17px;
@@ -78,7 +75,11 @@ header{
     font-family: poppins;
     text-transform: uppercase;
 }
-.banner-text a:hover{
+.banner-text a{
+    color: rgb(6, 31, 94);
+    text-decoration: none;
+}
+.banner-text span:hover{
     border-color: rgb(55, 206, 186);
     background: rgb(55, 206, 186);;
     transition: .9s;
