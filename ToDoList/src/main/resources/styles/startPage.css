@@ -49,7 +49,7 @@ header{
     float: left;
 }
 
-.form {
+form {
     position: absolute;
     top: 60%;
     left: 40%;

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to ToDoList</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../styles/startPage.css">
 </head>
 <body>
@@ -19,16 +20,24 @@
     </div>
 
     <div class="banner-text">
-        <button>Sign In</button>
-        <button>Sign Up</button>
+        <button id="signIn">Sign In</button>
+        <button id="signUp">Sign Up</button>
     </div>
 
-    <div class="form">
-        <form action="/signin" method="POST">
-            <div>Email: <input type="text" name="email"/></div>
-            <div>Password: <input type="password" name="password"/></div>
-            <input type="submit" value="Войти">
-        </form>
-    </div>
+    <form id="formLogin" action="/signin" method="POST" style="display: none;">
+        <div>Email:    <input type="text" name="email"/></div>
+        <div>Password: <input type="password" name="password"/></div>
+        <input type="submit" value="Войти">
+    </form>
 </body>
 </html>
+
+<script>
+$("#signUp").click(function(e) {
+    location.href = "/signup";
+});
+
+$("#signIn").click(function(e) {
+    $("#formLogin").toggle();
+});
+</script>
