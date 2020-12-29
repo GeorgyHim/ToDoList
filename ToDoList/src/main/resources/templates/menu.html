@@ -11,7 +11,9 @@
         <input type="submit" value="Выйти">
     </form>
 
-    <br>
+    <button id="delUser">Удалить пользователя</button>
+
+    <br><br>
 
     Планы
     <ul>
@@ -84,4 +86,17 @@ $("#change_pass").submit(function(e) {
         }
     });
 });
+
+$(document).ready(function() {
+    $("#delUser").click(function(){
+        $.ajax({
+            type: "DELETE",
+            url: "/profile",
+            success: function() {
+                location.href = "/";
+            }
+        })
+    });
+});
+
 </script>
