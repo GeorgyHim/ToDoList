@@ -13,7 +13,7 @@ header{
     padding: 15px 60px;
 }
 .menu{
-    width: 42%;
+    width: 45%;
     float: right;
     list-style: none;
 }
@@ -21,6 +21,7 @@ header{
     width: 100px;
     height: 50px;
     line-height: 50px;
+    border: 1px solid #fff;
     text-align: center;
     color: rgb(0, 0, 0);
     font-size: 13px;
@@ -35,7 +36,7 @@ header{
 .menu li a{
     text-decoration: none;
     font-family: baloo;
-    color: #fff;
+    color: rgb(6, 31, 94);
     text-transform: uppercase;
 }
 .logo{
@@ -71,7 +72,7 @@ header{
     border: 1px solid #fff;
     font-size: 17px;
     padding: 10px 35px;
-    color: #fff;
+    color: rgb(6, 31, 94);
     display: inline-block;
     margin-top: 5%;
     font-family: poppins;
